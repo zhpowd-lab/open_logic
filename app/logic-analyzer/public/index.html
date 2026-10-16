@@ -1,0 +1,115 @@
+<!doctype html>
+<html lang="zh-CN" data-theme="dark">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="dark light">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%23173a35'/%3E%3Cpath d='M4 22H10V10H18V22H24V10H28' fill='none' stroke='%2355dec1' stroke-width='2'/%3E%3C/svg%3E">
+  <title>LOGIC 16 · 遥信逻辑分析仪</title>
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+  <header class="app-header">
+    <div class="brand-mark" aria-hidden="true"><i data-lucide="audio-lines"></i></div>
+    <div class="brand"><strong>LOGIC <span>16</span></strong><small>遥信逻辑分析仪</small></div>
+    <span class="source-badge"><span class="status-dot"></span><span id="sourceBadge">正在加载本机数据</span></span>
+    <button id="theme" class="icon-button" aria-label="切换明暗主题" title="切换明暗主题"><i data-lucide="sun-moon"></i></button>
+  </header>
+  <div class="hardware-note"><i data-lucide="info"></i><span><strong>1 MHz 表示读取锁存器的速率。</strong> 现有开入光耦不能传递 MHz 级边沿。<span id="sourceModeNote">正在读取数据源状态。</span></span></div>
+  <main>
+    <details class="settings-panel" id="settingsPanel" open>
+      <summary>触发与数据 <i data-lucide="sliders-horizontal"></i></summary>
+      <div class="settings-body">
+        <div class="section-heading"><span class="eyebrow">EDGE TRIGGER</span><span class="tag">单通道</span></div>
+        <label>触发通道<select id="triggerChannel"></select></label>
+        <label>触发条件<select id="triggerEdge"><option value="rising">上升沿  0 → 1</option><option value="falling">下降沿  1 → 0</option><option value="either">双边沿  0 ↔ 1</option></select></label>
+        <label>搜索起点 / 样本索引<input id="triggerFrom" type="number" min="0" step="1" value="0"></label>
+        <label class="check"><input id="triggerOnRun" type="checkbox">运行时启用边沿触发</label>
+        <p class="hint">单次会搜索整段原始样本并冻结。触发点始终位于窗口中部；没有触发就停止，保留当前段。</p>
+        <div class="trigger-result" id="triggerResult" role="status">尚未搜索触发</div>
+        <hr>
+        <div class="section-heading"><span class="eyebrow">LOCAL SOURCE</span><span class="tag">LE · uint16</span></div>
+        <p class="source-name" id="sourceName">—</p>
+        <label>原始样本文件<input id="rawFile" type="file" accept=".u16,.bin,.dat"></label>
+        <label>元数据 JSON（可选）<input id="metaFile" type="file" accept=".json,application/json"></label>
+        <button id="loadFile" class="wide"><i data-lucide="folder-open"></i>载入本地文件</button>
+        <button id="reloadSource" class="wide subtle"><i data-lucide="rotate-ccw"></i>重新载入服务数据</button>
+        <p class="hint">bit0 = D0。缺少周期或计数时显示 unknown。文件只在本机浏览器读取。</p>
+        <div id="devicePanel" hidden>
+          <hr>
+          <div class="section-heading"><span class="eyebrow">CPU3 CAPTURE</span><span class="tag">独立装置</span></div>
+          <p class="hint" id="deviceStatus">装置状态 unknown</p>
+          <label>读取周期<select id="devicePeriod"><option value="24">1 µs · 1 MHz（目标档）</option><option value="48">2 µs · 500 kHz</option><option value="120">5 µs · 200 kHz</option><option value="240">10 µs · 100 kHz</option><option value="480">20 µs · 50 kHz</option><option value="2400">100 µs · 10 kHz</option><option value="24000">1 ms · 1 kHz</option></select></label>
+          <label>采集点数<input id="deviceDepth" type="number" min="1" max="1000000" step="1" value="1000000"></label>
+          <label>装置源<select id="devicePattern"><option value="0">16 位数据总线</option><option value="1">CPU3 软件图案 · 非实物输入</option></select></label>
+          <button id="armDevice" class="wide">新建装置采集</button>
+          <p class="hint">此按钮会替换装置当前段。上方“运行 / 停止 / 单次”只控制网页显示，不启停装置采集。</p>
+          <p class="hint" id="deviceTiming">实际读取间隔 unknown</p>
+        </div>
+        <hr>
+        <div class="section-heading"><span class="eyebrow">CAPTURE DEPTH</span></div>
+        <p class="depth-note">最多 1,000,000 点 · 2 MB · 1 s<br>满深度后停止，保留首段，不循环覆盖。</p>
+        <a href="https://github.com/sigrokproject/pulseview" target="_blank" rel="noopener" class="reference-link">功能规划参考 PulseView / sigrok <i data-lucide="arrow-up-right"></i></a>
+      </div>
+    </details>
+    <section class="workspace" aria-label="逻辑波形工作区">
+      <section id="livePanel" class="live-panel" aria-label="当前遥信实时监视" hidden>
+        <div class="live-heading"><strong>实时遥信监视</strong><output id="monitorWord">unknown</output><button id="monitorToggle" class="subtle">暂停监视</button></div>
+        <div id="monitorBits" class="monitor-bits"></div>
+        <p id="monitorStatus" role="status">等待 CPU3 当前读数</p>
+        <p class="hint">1 kHz 读取锁存器，网页每 200 ms 更新；显示原始 0/1，不反相。此区持续显示当前值，波形段保持独立；1 MHz 波形采集期间暂停监视。不用于捕获窄脉冲。</p>
+      </section>
+      <div class="metrics">
+        <div class="metric"><span>采样周期 / 锁存器读取</span><strong id="period">unknown</strong><small id="tickPeriod">unknown</small></div>
+        <div class="metric"><span>保留样本</span><strong id="sampleCount">—</strong><small id="rawSize">—</small></div>
+        <div class="metric"><span>丢样数</span><strong id="dropped">unknown</strong><small id="sequence">序号 unknown</small></div>
+        <div class="metric"><span>波形末点 · 16 位</span><strong class="word" id="liveWord">—</strong><small id="liveIndex">尚无样本</small></div>
+      </div>
+      <section class="instrument">
+        <div class="control-bar">
+          <div class="transport">
+            <button id="run" class="primary" disabled><i data-lucide="play"></i>运行</button>
+            <button id="stop" disabled><i data-lucide="pause"></i>停止</button>
+            <button id="single" disabled><i data-lucide="crosshair"></i>单次</button>
+          </div>
+          <span id="state" class="display-state" role="status" data-state="loading">正在加载</span>
+          <button id="restart" class="subtle" disabled title="明确从头回放同一个已保留的数据段"><i data-lucide="rotate-ccw"></i>从头回放</button>
+        </div>
+        <div id="notice" class="notice" role="status">停止只暂停网页显示刷新。</div>
+        <div class="view-bar">
+          <div class="tool-group">
+            <button id="cursorA" class="tool active" aria-pressed="true" title="放置游标 A">A</button>
+            <button id="cursorB" class="tool" aria-pressed="false" title="放置游标 B">B</button>
+            <button id="panTool" class="tool" aria-label="拖动平移" aria-pressed="false" title="拖动平移"><i data-lucide="hand"></i></button>
+          </div>
+          <div class="tool-group">
+            <button id="panLeft" class="tool" aria-label="向前平移"><i data-lucide="chevron-left"></i></button>
+            <button id="panRight" class="tool" aria-label="向后平移"><i data-lucide="chevron-right"></i></button>
+            <button id="zoomIn" class="tool" aria-label="横向放大"><i data-lucide="zoom-in"></i></button>
+            <button id="zoomOut" class="tool" aria-label="横向缩小"><i data-lucide="zoom-out"></i></button>
+          </div>
+          <button id="fit" class="subtle">整段</button>
+          <button id="showNotch" class="subtle" hidden>测试缺口</button>
+          <span class="view-extent" id="viewExtent">—</span>
+        </div>
+        <div class="plot-grid">
+          <div class="lane-labels" id="laneLabels" aria-label="16 条数字通道"></div>
+          <div class="canvas-wrap"><canvas id="plot" tabindex="0" aria-label="16路数字阶梯波形；滚轮缩放，方向键平移，点击放置游标"></canvas></div>
+        </div>
+        <div class="plot-footer"><span id="renderMode">原始阶梯</span><span>滚轮缩放 · 手形拖动平移 · A / B 放置游标</span></div>
+        <div class="overview-heading"><span class="eyebrow">整段概览</span><span id="overviewExtent">—</span></div>
+        <canvas id="overview" tabindex="0" aria-label="点击整段概览定位窗口"></canvas>
+        <label class="pan-label" for="pan">横向位置<input type="range" id="pan" min="0" max="10000" step="1" value="0"></label>
+      </section>
+      <section class="cursor-panel" aria-label="原始样本游标读数">
+        <div class="cursor-title"><span class="eyebrow">游标测量</span><span>读取原始样本</span></div>
+        <div class="cursor-readouts"><output id="readoutA" class="cursor-readout"></output><output id="readoutB" class="cursor-readout"></output></div>
+        <div class="cursor-actions"><label>精确定位索引<input id="cursorIndex" type="number" min="0" step="1" value="500248"></label><button id="locate">定位当前游标</button><output id="delta">Δt —</output></div>
+      </section>
+      <footer class="page-footer"><span>16 路 / 每点 2 字节 / 不插值 / 非 UTC 时标</span><span>OPEN LOGIC · 本机独立服务 :8102</span></footer>
+    </section>
+  </main>
+  <script src="/vendor/lucide.min.js"></script>
+  <script type="module" src="/app.mjs"></script>
+</body>
+</html>

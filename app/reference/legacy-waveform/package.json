@@ -1,0 +1,7 @@
+{
+  "name": "rt-mpu-waveform",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": { "build": "node build_fft.js", "prestart": "npm run build", "start": "node server.js", "test": "node --test test/*.test.js" },
+  "dependencies": { "fft.js": "4.0.4", "lucide": "0.468.0", "uplot": "1.6.31", "ws": "8.18.0" }
+}

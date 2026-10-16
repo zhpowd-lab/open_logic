@@ -1,0 +1,7 @@
+{
+  "format": "logic16-le-v1",
+  "samplePeriodTicks": 24,
+  "sequenceStart": 700,
+  "droppedSamples": 2,
+  "sampleCount": 4
+}

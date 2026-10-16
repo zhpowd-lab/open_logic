@@ -1,0 +1,21 @@
+{
+  "periodTicks": 24,
+  "requestedCount": 1000000,
+  "retainedCount": 1000000,
+  "state": "full",
+  "error": 0,
+  "dropped": 0,
+  "bytes": 2000000,
+  "minIntervalTicks": 24,
+  "maxIntervalTicks": 24,
+  "maxReadTicks": 4,
+  "maxLateTicks": 0,
+  "pattern": 1,
+  "progressSnapshots": 7,
+  "immutablePrefix": true,
+  "primingReads": 0,
+  "primingMaxTicks": 0,
+  "allPatternWordsMatch": true,
+  "notchTriggerIndex": 500248,
+  "cursorWordAfterOverview": 20748
+}

@@ -1,0 +1,96 @@
+async page => {
+  const checks = [], errors = [], requests = [];
+  const DESKTOP = { width: 1440, height: 1080 };
+  const NARROW = { width: 390, height: 844 };
+  const CHANNELS = 16, ZOOM_STEPS = 13, NOTCH = 500248, NOTCH_END = 500252;
+  const check = (ok, message) => { if (!ok) throw new Error(message); checks.push(message); };
+  const text = id => page.locator('#' + id).innerText();
+  const status = value => page.waitForFunction(value => document.querySelector('#state').dataset.state === value, value);
+  const settle = () => page.evaluate(() => new Promise(resolve => requestAnimationFrame(() => requestAnimationFrame(resolve))));
+  const point = async (name, index) => {
+    await page.locator('#cursor' + name).click();
+    await page.locator('#cursorIndex').fill(String(index));
+    await page.locator('#locate').click();
+    await settle();
+    return Number(await page.locator('#readout' + name).getAttribute('data-word'));
+  };
+  page.on('pageerror', error => errors.push(error.message));
+  page.on('request', request => requests.push({ method: request.method(), url: request.url() }));
+  await page.setViewportSize(DESKTOP);
+  await page.goto('http://127.0.0.1:8102/');
+  await status('ready');
+  await settle();
+  if (await page.evaluate(() => document.documentElement.dataset.theme !== 'dark')) await page.locator('#theme').click();
+  check(await page.locator('.lane-label').count() === CHANNELS, '真实装置链路显示16条泳道');
+  check((await text('sourceBadge')).includes('CPU3 软件图案'), 'CPU3图案明确区别于实物输入和服务软件源');
+  check((await text('period')) === '1 µs' && (await text('sampleCount')) === '1,000,000', 'CPU3一微秒与一百万点正确');
+  check((await text('dropped')) === '0', 'CPU3图案零丢样');
+  for (let index = 0; index < ZOOM_STEPS; index++) await page.locator('#zoomIn').click();
+  await page.locator('#triggerEdge').selectOption('falling');
+  await page.locator('#triggerFrom').fill(String(NOTCH - 8));
+  await page.locator('#single').click();
+  await status('triggered');
+  await settle();
+  check((await text('triggerResult')).includes('500,248'), 'CPU3原码缺口在500248触发并冻结');
+  const extent = (await text('viewExtent')).split(' → ').map(value => Number(value.replace(' ms', '')));
+  check(Math.abs((extent[0] + extent[1]) / 2 - NOTCH / 1000) < 0.00001, '触发点在窗口中部');
+  check(await point('A', NOTCH) === 0x510c && await point('B', NOTCH_END) === 0x510f, 'CPU3游标值与脚本逐点核对的原码一致');
+  check((await text('delta')).includes('4 µs'), 'CPU3一次缺口可读为4微秒');
+  await page.screenshot({ path: 'output/playwright/device-cpu3-pattern-desktop.png', fullPage: true });
+  await page.locator('#fit').click();
+  check((await text('renderMode')).includes('桶内') && await point('A', NOTCH) === 0x510c, '整段聚合后游标仍读原始样本');
+  await page.locator('#triggerChannel').selectOption('15');
+  await page.locator('#triggerFrom').fill('0');
+  await page.locator('#triggerEdge').selectOption('either');
+  await page.locator('#single').click();
+  await status('untriggered');
+  check((await text('state')).includes('未触发'), 'CPU3 D15没有边沿时保持停止');
+  check(requests.every(request => request.method === 'GET'), '打开、触发、游标和缩放只发送GET');
+
+  await page.locator('#devicePattern').selectOption('0');
+  await page.locator('#devicePeriod').selectOption('24');
+  await page.locator('#deviceDepth').fill('1000000');
+  await page.locator('#armDevice').click();
+  await status('running');
+  await page.waitForFunction(() => Number(document.querySelector('#sampleCount').textContent.replaceAll(',', '')) > 0);
+  await page.locator('#stop').click();
+  await status('stopped');
+  const frozen = await text('sampleCount');
+  await page.waitForTimeout(250);
+  check((await text('sampleCount')) === frozen, '真实采集中停止冻结网页样本数');
+  const continued = await page.evaluate(() => fetch('/api/capture').then(response => response.json()));
+  check(continued.sampleCount > Number(frozen.replaceAll(',', '')) || continued.captureState !== 'running', '停止显示后CPU3仍推进或正常结束，未发送停采');
+  await page.locator('#run').click();
+  await page.waitForFunction(() => ['full', 'error'].includes(document.querySelector('#state').dataset.state));
+  const final = await page.evaluate(() => fetch('/api/capture').then(response => response.json()));
+  check(final.pattern === false && final.softwareServiceTest === false, '网页已经切换到真实16位总线');
+  check((await text('sourceBadge')).includes('装置数据总线'), '真实输入来源清楚可见');
+  check(['full', 'fault'].includes(final.captureState), '装置采集结果通过状态明确收尾');
+  check(final.captureState === 'full' ? final.sampleCount === 1000000 && final.errorCode === 0 : final.errorCode !== 0,
+    '满深度或故障均保留实际段，不伪造一百万点');
+  check(requests.filter(request => request.method === 'POST').length === 1, '仅新建装置采集发送一次POST');
+  const actualWord = await page.evaluate(async () => {
+    const info = await fetch('/api/capture').then(response => response.json());
+    const query = new URLSearchParams({ capture: info.captureId, epoch: info.sourceEpoch, count: info.sampleCount });
+    const bytes = await fetch('/api/samples?' + query).then(response => response.arrayBuffer());
+    return new DataView(bytes).getUint16(0, true);
+  });
+  check(await point('A', 0) === actualWord, '真实总线游标与小端原码首点一致');
+  await page.screenshot({ path: 'output/playwright/device-real-desktop.png', fullPage: true });
+  await page.setViewportSize(NARROW);
+  await page.reload();
+  await status('ready');
+  await settle();
+  check(await page.locator('.lane-label').count() === CHANNELS, '真实源窄屏保持16路');
+  check(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth), '390像素真实源无横向溢出');
+  await page.locator('#settingsPanel summary').click();
+  await page.screenshot({ path: 'output/playwright/device-real-narrow.png', fullPage: true });
+  await page.locator('#theme').click();
+  await settle();
+  await page.screenshot({ path: 'output/playwright/device-real-narrow-light.png', fullPage: true });
+  check(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth), '窄屏设置展开及明暗主题无溢出');
+  check(errors.length === 0, '真实装置页面没有JavaScript异常');
+  return { passed: checks.length, checks, errors, armRequests: 1,
+    capture: { state: final.captureState, count: final.sampleCount, error: final.errorCode,
+      dropped: final.droppedSamples, minIntervalTicks: final.minIntervalTicks, maxIntervalTicks: final.maxIntervalTicks } };
+}

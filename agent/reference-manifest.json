@@ -1,0 +1,412 @@
+[
+  {
+    "path": "app\\reference\\docs\\T153-16路总线遥信与定频逻辑采集-20261015.md",
+    "bytes": 9427,
+    "sha256": "39d591149b0f659e6c0f7802a3ab5ba3e691ea5ca36c36acca3edb873e3603f1"
+  },
+  {
+    "path": "app\\reference\\docs\\T153-A7独立采集运行与示波器基准-20261014.md",
+    "bytes": 9197,
+    "sha256": "bacb01e252c589ef15b63a1d72ac89c2b2d69272498b6257b94c9b9c2564e643"
+  },
+  {
+    "path": "app\\reference\\docs\\T153-A7实时输入完整迁移与SDK配套-20261016.md",
+    "bytes": 8953,
+    "sha256": "f27f118faf74fc5de43f4fc44c58cb860e1f63077d96b62c400ecd396d903e40"
+  },
+  {
+    "path": "app\\reference\\legacy-a7\\acquisition\\access.h",
+    "bytes": 299,
+    "sha256": "84c91280ecd372c9e36b6f31da959bbe2afbe06699e6caeae6927d87abac106c"
+  },
+  {
+    "path": "app\\reference\\legacy-a7\\acquisition\\acquisition.c",
+    "bytes": 12965,
+    "sha256": "bb96e8db0316ce429ea6c2451d4ffbea09e4eb39a84527a5c1de5d9202b8ccd4"
+  },
+  {
+    "path": "app\\reference\\legacy-a7\\acquisition\\acquisition.h",
+    "bytes": 2628,
+    "sha256": "930c71a9e59b2842523605f4a285646aa4ee45b8764d897b43370b856021c4de"
+  },
+  {
+    "path": "app\\reference\\legacy-a7\\acquisition\\aux_boot_time.h",
+    "bytes": 1182,
+    "sha256": "0e274571b30ccfa7d87c539eda5825d39efb8cbde80dde30871f12a0484ae7f8"
+  },
+  {
+    "path": "app\\reference\\legacy-a7\\acquisition\\board.c",
+    "bytes": 21621,
+    "sha256": "b4aea72f54c4f3fb5d02b5d637260a90fcaebb3677acc91b8d8923705c528d80"
+  },
+  {
+    "path": "app\\reference\\legacy-a7\\acquisition\\board.h",
+    "bytes": 1323,
+    "sha256": "a5d9dc37e47c46f2120106f2d46ca2972777c6a0da90cf99ccffc462e2a491c6"
+  },
+  {
+    "path": "app\\reference\\legacy-a7\\acquisition\\bus_di.h",
+    "bytes": 1309,
+    "sha256": "37989514c326fcb657be0a23ef76d599482e518fc3743d610269b21a788aa36b"
+  },
+  {
+    "path": "app\\reference\\legacy-a7\\acquisition\\cache.S",
+    "bytes": 585,
+    "sha256": "2508708842e2e9544cef6620f6d1e4aab83ca6172e9190af0054a6520f01b417"
+  },
+  {
+    "path": "app\\reference\\legacy-a7\\acquisition\\link.ld",
+    "bytes": 986,
+    "sha256": "adc0fb5056cf9d131fffa59b361e53c175b37045da4c6d24d596a544100fc11b"
+  },
+  {
+    "path": "app\\reference\\legacy-a7\\acquisition\\linux_access.c",
+    "bytes": 12158,
+    "sha256": "9bccb0d59dd471109b7863572db62f3ddde902817997cce082cca9da76fc77d2"
+  },
+  {
+    "path": "app\\reference\\legacy-a7\\acquisition\\linux_realtime_io.c",
+    "bytes": 9825,
+    "sha256": "c1129d3bfb46b5fab319867fbb7e3fd570112a38bee8ab8f72ced403ad96b0c7"
+  },
+  {
+    "path": "app\\reference\\legacy-a7\\acquisition\\linux_realtime_io.h",
+    "bytes": 564,
+    "sha256": "3c9fe892d45a06e13f1c17d97dfb4b7e3b5205c71fa6630e2a396f04795ffccd"
+  },
+  {
+    "path": "app\\reference\\legacy-a7\\acquisition\\linux_transport.c",
+    "bytes": 11192,
+    "sha256": "077999d7a47f05811fe6eeeea30e48def357f75b5cd4f6a1b3a5c6e1675b52fc"
+  },
+  {
+    "path": "app\\reference\\legacy-a7\\acquisition\\linux_transport.h",
+    "bytes": 461,
+    "sha256": "45e0c4acd010e72147f7c1769af6c5f3a68d6d21ea1eccf422d52d21b9a37d2b"
+  },
+  {
+    "path": "app\\reference\\legacy-a7\\acquisition\\main.c",
+    "bytes": 24391,
+    "sha256": "bf6e5f5ec70dffead64a1caabbbc944802f5e246be74fb0234ed1dcfdb05c99a"
+  },
+  {
+    "path": "app\\reference\\legacy-a7\\acquisition\\memory.c",
+    "bytes": 1539,
+    "sha256": "e57f67c423ee38d53ff9e3e55c1b37ea0e2e5db5296b386f1c4d4bc8ab98079e"
+  },
+  {
+    "path": "app\\reference\\legacy-a7\\acquisition\\mmu.c",
+    "bytes": 2701,
+    "sha256": "0173a28e944e6bbabafbbef2d7abd2dc3e14e4a0336658e36ed5e048996f8a5e"
+  },
+  {
+    "path": "app\\reference\\legacy-a7\\acquisition\\native_progress.h",
+    "bytes": 1281,
+    "sha256": "4ae6ca7bd98bc848a95700d1cd02bf0adace2961843e0fb4c9564eb2ad37fad6"
+  },
+  {
+    "path": "app\\reference\\legacy-a7\\acquisition\\protocol.h",
+    "bytes": 1602,
+    "sha256": "3b7ffe474979e654a6f9a06e80a85107d7d400dad0bbb91f2827e07113657591"
+  },
+  {
+    "path": "app\\reference\\legacy-a7\\acquisition\\rates.h",
+    "bytes": 1423,
+    "sha256": "9cb81167be3ab002de8304b37802406e257250be5f6160e83d7ad3098c239603"
+  },
+  {
+    "path": "app\\reference\\legacy-a7\\acquisition\\realtime_io_ioctl.h",
+    "bytes": 330,
+    "sha256": "ab7acb014e9c5c384fde8160ed21f1950fe05f88b941a7fdcc2d4a8fcefcf9e2"
+  },
+  {
+    "path": "app\\reference\\legacy-a7\\acquisition\\realtime_io.c",
+    "bytes": 20944,
+    "sha256": "e45e738cc4c2a60abfd6baf60a37b5355113064a67ba94bbfae34a22185e19ea"
+  },
+  {
+    "path": "app\\reference\\legacy-a7\\acquisition\\realtime_io.h",
+    "bytes": 2382,
+    "sha256": "6511271a06df34d05154e864f5e12aa7175251273ef04a272aa2d21cd6812f59"
+  },
+  {
+    "path": "app\\reference\\legacy-a7\\acquisition\\sample_time.h",
+    "bytes": 3060,
+    "sha256": "348a48793f001b603a56570973bd7e52141b513be490ed9917bafc2a462f5963"
+  },
+  {
+    "path": "app\\reference\\legacy-a7\\acquisition\\service_window.h",
+    "bytes": 656,
+    "sha256": "ea58a2e2e67aa165e811c2b855b0a451f6595ee04fac4df94359277caa973962"
+  },
+  {
+    "path": "app\\reference\\legacy-a7\\acquisition\\test_client.c",
+    "bytes": 25314,
+    "sha256": "46bcd4c39820f6ca2e5c51ae680020cba54fb21e2f56040d3a1457adc13789eb"
+  },
+  {
+    "path": "app\\reference\\legacy-a7\\rt-include\\rt_acquisition_board.h",
+    "bytes": 1484,
+    "sha256": "48b76d853075bc58bfb2cef33815786dfe49cea4400df1f98ec8202f56c33246"
+  },
+  {
+    "path": "app\\reference\\legacy-a7\\rt-include\\rt_acquisition_config.h",
+    "bytes": 710,
+    "sha256": "dab3722c5f7710a2032c39dba19def30f0d69e296d1e67caad26b8bf49720c63"
+  },
+  {
+    "path": "app\\reference\\legacy-a7\\rt-include\\rt_acquisition_diagnostics.h",
+    "bytes": 8213,
+    "sha256": "a8c65e22a399f8b79e1ff731f9e00da5e484c6daa249cbc842b0e37638b0a5db"
+  },
+  {
+    "path": "app\\reference\\legacy-a7\\rt-include\\rt_acquisition_rate.h",
+    "bytes": 2775,
+    "sha256": "9e0e6893000717b1936bafc1f7241772062eb057a0bef32af9ba672c0e4b9fd9"
+  },
+  {
+    "path": "app\\reference\\legacy-a7\\rt-include\\rt_acquisition_target.h",
+    "bytes": 1098,
+    "sha256": "9491b61185779b04f3dfd9b3bf5baaf60180398f3f82128d90152ab4621497ca"
+  },
+  {
+    "path": "app\\reference\\legacy-a7\\rt-include\\rt_acquisition.h",
+    "bytes": 1202,
+    "sha256": "9fb960e59543b5959c20198c9e3f6d20ed0faccd35bbd8e733a2de28bcdcfd57"
+  },
+  {
+    "path": "app\\reference\\legacy-a7\\rt-include\\rt_adc_lbc_timing.h",
+    "bytes": 2414,
+    "sha256": "9c3bbef74b5e1228df6f706dad45976bb5ad570331f3f459f4314ffd30c6c196"
+  },
+  {
+    "path": "app\\reference\\legacy-a7\\rt-include\\rt_adc_scope_protocol.h",
+    "bytes": 1417,
+    "sha256": "7f7f93b46f0d4d2d8787f66f871f3724204642778946923b4a8f6cc28b84af2f"
+  },
+  {
+    "path": "app\\reference\\legacy-a7\\rt-include\\rt_clock_math.h",
+    "bytes": 611,
+    "sha256": "5c69307eecf7da5e1fd0923d2d87885fcc78f27de7b98722ad01daaa90542d93"
+  },
+  {
+    "path": "app\\reference\\legacy-a7\\rt-include\\rt_sample_device.h",
+    "bytes": 2681,
+    "sha256": "c5c8c9472f6580faea1d4b241755fdba587c518af81d08dd8295ec6fe4eec31e"
+  },
+  {
+    "path": "app\\reference\\legacy-a7\\rt-include\\rt_sample_recovery.h",
+    "bytes": 3285,
+    "sha256": "e4d0c73ea22deee7aef4f9e887b7909825394a30750df9401dbdafbf71598fd2"
+  },
+  {
+    "path": "app\\reference\\legacy-a7\\rt-include\\rt_sample_stream.h",
+    "bytes": 1926,
+    "sha256": "b87399e3b83d8369446bf3e3e3593b1188f686c338e5b97c57ff460879398805"
+  },
+  {
+    "path": "app\\reference\\legacy-a7\\rt-include\\rt_shared_abi.h",
+    "bytes": 15884,
+    "sha256": "13afbaf4831217b4aff580b72545d1afd778c43f8c51bc3e9d607a5e56626882"
+  },
+  {
+    "path": "app\\reference\\legacy-a7\\rt-include\\rt_shared_ring.h",
+    "bytes": 4474,
+    "sha256": "79b590521b1a7ec0e8f1bef707039cc3c21e3e6644d5c01535d2c830dba324b9"
+  },
+  {
+    "path": "app\\reference\\legacy-a7\\rt-include\\rt_software_clock.h",
+    "bytes": 3657,
+    "sha256": "81beea17a5af09d2fdb72c408d71b3fcae8080525af30942b9d74f70d6045f54"
+  },
+  {
+    "path": "app\\reference\\legacy-a7\\tests\\acquisition_test.c",
+    "bytes": 7485,
+    "sha256": "8e484f92bcaf24d2cfbb63ab358aa671f4b3e0e424872d14590ff0742de95e23"
+  },
+  {
+    "path": "app\\reference\\legacy-a7\\tests\\board_test.c",
+    "bytes": 10910,
+    "sha256": "c47c566d6a5c282e605d4399c7afd94e40f84d5d2ab21811c5a9764abcc490a8"
+  },
+  {
+    "path": "app\\reference\\legacy-a7\\tests\\bus_di_test.c",
+    "bytes": 3093,
+    "sha256": "a6438203f4ce9cacdb4e5775f071f2892926a0da66e24e05fd57dbb03831e1fd"
+  },
+  {
+    "path": "app\\reference\\legacy-a7\\tests\\busy_window_test.c",
+    "bytes": 4172,
+    "sha256": "50c8cfb3de3b438cdddf6ca07f34eefbac171b0ea81b484bf5a4f5a5236d3495"
+  },
+  {
+    "path": "app\\reference\\legacy-a7\\tests\\client_copy_test.c",
+    "bytes": 1090,
+    "sha256": "c56ed9ca19f3cbb4219d652ada4504053608a22c468130e7c48c30a5207c72de"
+  },
+  {
+    "path": "app\\reference\\legacy-a7\\tests\\memory_test.c",
+    "bytes": 1669,
+    "sha256": "0db92e647d7dc42e9c7f3938f5e827d428b701dfac607500d6640e69dedf95d0"
+  },
+  {
+    "path": "app\\reference\\legacy-a7\\tests\\native_progress_test.c",
+    "bytes": 987,
+    "sha256": "429911b0b8a82944a6b0086dd9ac1ce9fe13d999caf8a861932b14433904ee49"
+  },
+  {
+    "path": "app\\reference\\legacy-a7\\tests\\rates_test.c",
+    "bytes": 3299,
+    "sha256": "64101eeb91610d43af6d528b619502fd0cf1955cebe644a43a5c05f7d1133d98"
+  },
+  {
+    "path": "app\\reference\\legacy-a7\\tests\\realtime_io_test.c",
+    "bytes": 8945,
+    "sha256": "c2f2288e17ad5eb8ac7744b1305c6f02193ae2d1b9ce6666dd68103c5a7e4c07"
+  },
+  {
+    "path": "app\\reference\\legacy-a7\\tests\\sample_time_test.c",
+    "bytes": 2189,
+    "sha256": "5790790aa2b52c27b4449a62eede7c3cb40434bc5e598b80bcb4536d5ff71139"
+  },
+  {
+    "path": "app\\reference\\legacy-a7\\tests\\service_window_test.c",
+    "bytes": 719,
+    "sha256": "9cc9b700ef866e16975d320839932d313955e5707bca1ba0e727a3dcd18c431b"
+  },
+  {
+    "path": "app\\reference\\legacy-waveform\\capture-state.js",
+    "bytes": 10636,
+    "sha256": "7420967d061ef60a45ad4a6f6a9117f3a897a86b6001cddd6b03e05e81310a0e"
+  },
+  {
+    "path": "app\\reference\\legacy-waveform\\capture.js",
+    "bytes": 31739,
+    "sha256": "c0777182ff21726561b51afc016e5350903eb6f8237443301ff6b14350162d9d"
+  },
+  {
+    "path": "app\\reference\\legacy-waveform\\channels.js",
+    "bytes": 6835,
+    "sha256": "b230356b6372f184a4d672185a6e895fcdd9092a3e1edfd98a90cdba782c4607"
+  },
+  {
+    "path": "app\\reference\\legacy-waveform\\debug-diagnostics.js",
+    "bytes": 3191,
+    "sha256": "d8e512bc610fd2ad4c0100f29943329978b0885b11c6f8c5b216862294171261"
+  },
+  {
+    "path": "app\\reference\\legacy-waveform\\debug-server.js",
+    "bytes": 2547,
+    "sha256": "a390e463a7c5a177f0b48d7196a912b51346fac8ae4c3e094c5519b8aa414bf1"
+  },
+  {
+    "path": "app\\reference\\legacy-waveform\\device-link.js",
+    "bytes": 7900,
+    "sha256": "ed382c69723898f2a842e310174e789a54a7ad37ebb1dc4b655f1498b863d632"
+  },
+  {
+    "path": "app\\reference\\legacy-waveform\\package-lock.json",
+    "bytes": 1761,
+    "sha256": "85510658340ba9c7d5a5876971065aa123c36b6b3e96b0b1941610bdb39c7068"
+  },
+  {
+    "path": "app\\reference\\legacy-waveform\\package.json",
+    "bytes": 311,
+    "sha256": "08fd38fd09b50a9277889eecd2fd30804b7ec45bebf6e5117707fca4935da798"
+  },
+  {
+    "path": "app\\reference\\legacy-waveform\\README.md",
+    "bytes": 19599,
+    "sha256": "199b3fbbf35ce79c14bcbfc7ded2cb92a67410fb9a30f769b425090847bef983"
+  },
+  {
+    "path": "app\\reference\\legacy-waveform\\server.js",
+    "bytes": 13004,
+    "sha256": "de1e345128085c72a15580aea7132b92a657bfd2a046799b0d05aaf06ac7956f"
+  },
+  {
+    "path": "app\\reference\\legacy-waveform\\spectrum.js",
+    "bytes": 4261,
+    "sha256": "07ee4a673e57cfdc968202f541d6a1307aaca6f811fab85ddccc95df887c9e72"
+  },
+  {
+    "path": "app\\reference\\legacy-waveform\\THIRD_PARTY.md",
+    "bytes": 1018,
+    "sha256": "41f4a8bb94d4cd0747e329348c66ee2409ec619798be46327d904998df8db6c3"
+  },
+  {
+    "path": "app\\reference\\legacy-waveform\\public\\app.js",
+    "bytes": 53077,
+    "sha256": "e739ab8a1394f7293bedc24635d5e8ca9d2c81f447ff9314e38250a702633c0e"
+  },
+  {
+    "path": "app\\reference\\legacy-waveform\\public\\debug.css",
+    "bytes": 1901,
+    "sha256": "94b059f325396e411358a2dccdcb7f203e48218ab46b39bb2261e1a1b247f87f"
+  },
+  {
+    "path": "app\\reference\\legacy-waveform\\public\\debug.html",
+    "bytes": 2127,
+    "sha256": "35fec650511c58c3bf4af41bf75d76b3567be09fe2657c5b5036e56cfb4c81d9"
+  },
+  {
+    "path": "app\\reference\\legacy-waveform\\public\\debug.js",
+    "bytes": 31206,
+    "sha256": "11e833685b97c30e90179097e85337603fe2ba1fcb69efdea9070227b032c7a3"
+  },
+  {
+    "path": "app\\reference\\legacy-waveform\\public\\fft.bundle.js",
+    "bytes": 13194,
+    "sha256": "8e229b297c6891469bf7cc02435541b78ca04ebbdec755e597fbc351c05068d7"
+  },
+  {
+    "path": "app\\reference\\legacy-waveform\\public\\index.html",
+    "bytes": 9046,
+    "sha256": "31c81ac116e619c5833aef5d2b22348f4b9f1e7a6aae49ed9dfdbf4c4c8c1abf"
+  },
+  {
+    "path": "app\\reference\\legacy-waveform\\public\\style.css",
+    "bytes": 8366,
+    "sha256": "c7d01341d4b1645d8b1ee827696b7b51c671071aea682d2c12c9a9ebf27df401"
+  },
+  {
+    "path": "app\\reference\\legacy-waveform\\public\\workspace-model.js",
+    "bytes": 8677,
+    "sha256": "91ef23aa4d37d75d45222de84f7d1b8f906e830b887b39b638cbae8235fab8d4"
+  },
+  {
+    "path": "app\\reference\\legacy-waveform\\public\\workspace-worker.js",
+    "bytes": 2275,
+    "sha256": "607a6d864bd153b2c7f87b9cf692e73b0666489786ec32f257fb52db5034f073"
+  },
+  {
+    "path": "app\\reference\\legacy-waveform\\public\\workspace.css",
+    "bytes": 11025,
+    "sha256": "ef837c5b96be09107b30effb38d8c0b817adb26fde1a6f543ad2b0ba8b6b88a8"
+  },
+  {
+    "path": "app\\reference\\legacy-waveform\\public\\workspace.html",
+    "bytes": 8529,
+    "sha256": "9011f89cf9777427dd16c863374dfa308b5f1d64ca3ce7fec51576fa66b7979c"
+  },
+  {
+    "path": "app\\reference\\legacy-waveform\\public\\workspace.js",
+    "bytes": 34048,
+    "sha256": "2be56802616e0e4def30c4c1e8dca707601974a8c3c7cf6d4d47d8205567699c"
+  },
+  {
+    "path": "app\\reference\\tools\\capture_a7_native.py",
+    "bytes": 1392,
+    "sha256": "123d964758546653e256e885c825b502fc256d827bb60d34a1615d5432dca698"
+  },
+  {
+    "path": "app\\reference\\tools\\export_bus_di.py",
+    "bytes": 4525,
+    "sha256": "dc30c5001a453d2f32550bc7f3ea59b172866dd5a70c207ce52b8fc55d16156f"
+  },
+  {
+    "path": "app\\reference\\tools\\test_export_bus_di.py",
+    "bytes": 2855,
+    "sha256": "fcf36345f047cebb076ebb118d880809809b579923196f66a380cf9133acfa1d"
+  }
+]

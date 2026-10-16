@@ -1,0 +1,67 @@
+async page => {
+  const checks = [], errors = [], requests = [];
+  const check = (ok, text) => { if (!ok) throw new Error(text); checks.push(text); };
+  page.on('pageerror', error => errors.push(error.message));
+  page.on('request', request => requests.push({ method: request.method(), url: request.url() }));
+  const text = id => page.locator('#' + id).innerText();
+  const status = value => page.waitForFunction(value => document.querySelector('#state').dataset.state === value, value);
+  const settle = () => page.evaluate(() => new Promise(resolve => requestAnimationFrame(() => requestAnimationFrame(resolve))));
+  const point = async (name, index) => {
+    await page.locator('#cursor' + name).click(); await page.locator('#cursorIndex').fill(String(index));
+    await page.locator('#locate').click(); await settle();
+    return Number(await page.locator('#readout' + name).getAttribute('data-word'));
+  };
+  await page.setViewportSize({ width: 1440, height: 1080 });
+  await page.goto('http://127.0.0.1:8104/'); await status('ready'); await settle();
+  check(await page.locator('.lane-label').count() === 16, '独立装置源显示16路');
+  check((await text('sourceBadge')).includes('服务软件测试'), '软件服务测试明确标识，未冒充硬件');
+  check((await text('deviceTiming')).includes('unknown'), '软件测试没有伪造实际采样间隔');
+  for (let i = 0; i < 13; i++) await page.locator('#zoomIn').click();
+  await page.locator('#triggerEdge').selectOption('falling'); await page.locator('#triggerFrom').fill('500240');
+  await page.locator('#single').click(); await status('triggered');
+  check((await text('triggerResult')).includes('500,248'), '装置协议图案缺口在原始索引500248触发');
+  check(await point('A', 500248) === 0x510c && await point('B', 500252) === 0x510f, '装置协议原码和游标小端值一致');
+  check((await text('delta')).includes('4 µs'), '装置协议缺口宽4µs');
+  await page.screenshot({ path: 'output/playwright/device-mock-desktop.png', fullPage: true });
+  await page.locator('#fit').click(); await settle();
+  check((await text('renderMode')).includes('桶内') && await point('A', 500248) === 0x510c, '整段抽点后仍从原码读取游标');
+  await page.locator('#triggerChannel').selectOption('15'); await page.locator('#triggerFrom').fill('0');
+  await page.locator('#triggerEdge').selectOption('either'); await page.locator('#single').click(); await status('untriggered');
+  check((await text('state')).includes('未触发'), '装置段没有触发沿时保持停止');
+  await page.route('**/api/capture', async route => { await new Promise(resolve => setTimeout(resolve, 250)); await route.continue(); });
+  await page.locator('#run').click(); await status('running');
+  await page.locator('#stop').click(); await status('stopped');
+  const frozen = await text('liveIndex'); await page.waitForTimeout(500);
+  check((await text('liveIndex')) === frozen && (await text('state')).includes('已停止'), '停止后迟到的装置响应不覆盖冻结状态');
+  await page.unroute('**/api/capture');
+  await page.locator('#run').click(); await status('full');
+  check(requests.every(request => request.method === 'GET'), '运行、停止、单次和恢复只产生GET');
+  await page.locator('#devicePattern').selectOption('1');
+  const before = await text('deviceStatus');
+  await page.locator('#armDevice').click(); await status('full');
+  check((await text('deviceStatus')) !== before, '明确新建采集后切换到新数据段');
+  check(requests.filter(request => request.method === 'POST').length === 1, '只有新建采集发送一次POST');
+  await page.locator('#devicePeriod').selectOption('240');
+  check(await page.locator('#deviceDepth').inputValue() === '100000', '慢周期深度同时受1秒上限约束');
+  await page.route('**/api/capture', async route => {
+    const response = await route.fetch(); const body = await response.json();
+    Object.assign(body, { captureId: 0, sampleCount: 0, samplePeriodTicks: null, sequenceStart: null,
+      droppedSamples: null, captureState: 'idle', firstSampleTick: null, lastSampleTick: null });
+    await route.fulfill({ response, json: body });
+  });
+  await page.reload(); await status('ready'); await settle();
+  check((await text('period')) === 'unknown' && (await text('dropped')) === 'unknown' && (await text('sampleCount')) === '0', '尚未采集时周期和丢样保持unknown，空段不崩溃');
+  check(await page.locator('.lane-label').count() === 16 && await page.locator('#run').isEnabled(), '待采集空段仍显示16路且可运行显示刷新');
+  await page.unroute('**/api/capture');
+  await page.locator('#reloadSource').click(); await status('ready');
+  await page.setViewportSize({ width: 390, height: 844 }); await page.reload(); await status('ready'); await settle();
+  check(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth), '装置页面390px没有横向溢出');
+  check(await page.locator('.lane-label').count() === 16, '窄屏保持16路');
+  await page.locator('#settingsPanel summary').click();
+  await page.screenshot({ path: 'output/playwright/device-mock-narrow.png', fullPage: true });
+  await page.locator('#theme').click(); await settle();
+  await page.screenshot({ path: 'output/playwright/device-mock-narrow-light.png', fullPage: true });
+  check(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth), '装置设置展开与亮色主题没有横向溢出');
+  check(errors.length === 0, '装置页面无JavaScript异常');
+  return { passed: checks.length, checks, errors, postCount: requests.filter(request => request.method === 'POST').length };
+}

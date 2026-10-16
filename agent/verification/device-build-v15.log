@@ -1,0 +1,9 @@
+make: Entering directory '/root/open_logic_20261016/sdk/kernel/linux-5.10-rt'
+make[1]: Entering directory '/root/open_logic_20261016/build'
+  CC [M]  /root/open_logic_20261016/release-v15/source/linux/access.o
+  LD [M]  /root/open_logic_20261016/release-v15/source/linux/logic16_access.o
+  MODPOST /root/open_logic_20261016/release-v15/source/linux/Module.symvers
+  CC [M]  /root/open_logic_20261016/release-v15/source/linux/logic16_access.mod.o
+  LD [M]  /root/open_logic_20261016/release-v15/source/linux/logic16_access.ko
+make[1]: Leaving directory '/root/open_logic_20261016/build'
+make: Leaving directory '/root/open_logic_20261016/sdk/kernel/linux-5.10-rt'

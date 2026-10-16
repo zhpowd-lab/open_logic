@@ -1,0 +1,18 @@
+[
+  {
+    "file": "logic16.elf",
+    "matches": true
+  },
+  {
+    "file": "logic16_access.ko",
+    "matches": true
+  },
+  {
+    "file": "service.py",
+    "matches": true
+  },
+  {
+    "file": "run-device.sh",
+    "matches": true
+  }
+]

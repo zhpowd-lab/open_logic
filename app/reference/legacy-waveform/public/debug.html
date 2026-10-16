@@ -1,0 +1,19 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>RT_MPU 独立运行诊断</title><link rel="stylesheet" href="/debug.css"></head>
+<body><header><strong>RT_MPU · 运行诊断</strong><a href="http://127.0.0.1:8098/">实时波形</a></header>
+<main><div class="toolbar"><button id="refresh">读取一次</button><label><input id="auto" type="checkbox">每 2 秒刷新</label><span id="status" role="status">尚未读取，点击“读取一次”。</span></div>
+<p class="note">仅在本页按需读取。切换到其他页面、隐藏或关闭本页会停止刷新。各组为独立快照，计数与最大耗时属于本次程序会话；无法读取的字段显示“未知”。</p>
+<p id="stamp">读取时间：—</p><nav class="diagnostic-tabs" role="tablist" aria-label="运行诊断分类">
+<button id="tab-overview" role="tab" aria-controls="panel-overview">概览</button>
+<button id="tab-acquisition" role="tab" aria-controls="panel-acquisition">采集</button>
+<button id="tab-protection" role="tab" aria-controls="panel-protection">保护</button>
+<button id="tab-can" role="tab" aria-controls="panel-can">CAN 与动作</button>
+<button id="tab-e907-faults" role="tab" aria-controls="panel-e907-faults">采集核故障</button>
+<button id="tab-platform" role="tab" aria-controls="panel-platform">队列与平台</button></nav>
+<div id="sections">
+<div id="panel-overview" class="sections" role="tabpanel" aria-labelledby="tab-overview"></div>
+<div id="panel-acquisition" class="sections" role="tabpanel" aria-labelledby="tab-acquisition" hidden></div>
+<div id="panel-protection" class="sections" role="tabpanel" aria-labelledby="tab-protection" hidden></div>
+<div id="panel-can" class="sections" role="tabpanel" aria-labelledby="tab-can" hidden></div>
+<div id="panel-e907-faults" class="sections" role="tabpanel" aria-labelledby="tab-e907-faults" hidden></div>
+<div id="panel-platform" class="sections" role="tabpanel" aria-labelledby="tab-platform" hidden></div></div></main><script src="/debug.js"></script></body></html>

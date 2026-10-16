@@ -1,0 +1,20 @@
+{
+  "periodTicks": 240,
+  "requestedCount": 100000,
+  "retainedCount": 100000,
+  "state": "full",
+  "error": 0,
+  "dropped": 0,
+  "bytes": 200000,
+  "minIntervalTicks": 240,
+  "maxIntervalTicks": 240,
+  "maxReadTicks": 20,
+  "maxLateTicks": 0,
+  "pattern": 0,
+  "progressSnapshots": 9,
+  "immutablePrefix": true,
+  "primingReads": 16,
+  "primingMaxTicks": 16,
+  "firstWord": "0xffff",
+  "lastWord": "0xffff"
+}

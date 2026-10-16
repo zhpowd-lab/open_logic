@@ -1,0 +1,26 @@
+[
+  {
+    "capture": "di-100khz-v6",
+    "sampleCount": 100000,
+    "uniqueWordCount": 1,
+    "uniqueWords": [
+      "0xFFFF"
+    ]
+  },
+  {
+    "capture": "di-1mhz-final-v13",
+    "sampleCount": 318899,
+    "uniqueWordCount": 1,
+    "uniqueWords": [
+      "0xFFFF"
+    ]
+  },
+  {
+    "capture": "di-1mhz-final-v13-repeat",
+    "sampleCount": 1000000,
+    "uniqueWordCount": 1,
+    "uniqueWords": [
+      "0xFFFF"
+    ]
+  }
+]

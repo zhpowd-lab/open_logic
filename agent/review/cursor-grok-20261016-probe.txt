@@ -1,0 +1,2 @@
+Cursor Grok: grok-4.7-xhigh-fast (Windows, ask)
+PONG

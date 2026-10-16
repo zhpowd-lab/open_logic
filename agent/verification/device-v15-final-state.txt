@@ -1,0 +1,27 @@
+uname -r && cat /sys/devices/system/cpu/online && cat /sys/class/remoteproc/remoteproc0/name /sys/class/remoteproc/remoteproc0/state /sys/class/remoteproc/remoteproc1/name /sys/class/remoteproc/remoteproc1/state && cd /app/open_logic/releases/20261016-v15 && sha256sum -c SHA256SUMS; printf '\n__L16_RESULT:%d\n' $?
+
+5.10.198-rt97-rtmpu-periph3-a7-rt
+
+0-2
+
+rt_mpu_a7_rproc
+
+running
+
+e907_rproc
+
+offline
+
+logic16.elf: OK
+
+logic16_access.ko: OK
+
+service.py: OK
+
+run-device.sh: OK
+
+
+
+__L16_RESULT:0
+
+root@TQ153:/app/open_logic/releases/20261016-v15# 

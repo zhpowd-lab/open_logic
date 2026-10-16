@@ -1,0 +1,85 @@
+cat /sys/kernel/debug/gpio && ls /sys/kernel/debug/pinctrl && dmesg | tail -n 8; printf '\n__L16_RESULT:%d\n' $?
+
+gpiochip0: GPIOs 0-351, parent: platform/3604000.pinctrl, 3604000.pinctrl:
+
+ gpio-12  (                    |open_logic16        ) in  lo 
+
+ gpio-13  (                    |open_logic16        ) in  lo 
+
+ gpio-14  (                    |open_logic16        ) in  lo 
+
+ gpio-15  (                    |open_logic16        ) in  lo 
+
+ gpio-16  (                    |open_logic16        ) in  lo 
+
+ gpio-17  (                    |open_logic16        ) in  lo 
+
+ gpio-18  (                    |open_logic16        ) in  lo 
+
+ gpio-19  (                    |open_logic16        ) in  lo 
+
+ gpio-21  (                    |open_logic16        ) out lo 
+
+ gpio-40  (                    |PHY reset           ) out hi ACTIVE LOW
+
+ gpio-106 (                    |PHY reset           ) out hi ACTIVE LOW
+
+ gpio-108 (                    |open_logic16        ) in  lo 
+
+ gpio-109 (                    |open_logic16        ) in  lo 
+
+ gpio-110 (                    |open_logic16        ) in  lo 
+
+ gpio-111 (                    |open_logic16        ) in  lo 
+
+ gpio-112 (                    |open_logic16        ) in  lo 
+
+ gpio-113 (                    |open_logic16        ) in  lo 
+
+ gpio-114 (                    |open_logic16        ) in  lo 
+
+ gpio-115 (                    |open_logic16        ) in  lo 
+
+ gpio-116 (                    |open_logic16        ) out hi 
+
+ gpio-117 (                    |open_logic16        ) in  lo 
+
+ gpio-128 (                    |rt_mpu_external_watc) out lo 
+
+ gpio-299 (                    |PHY reset           ) out hi ACTIVE LOW
+
+ gpio-323 (                    |open_logic16        ) out hi 
+
+ gpio-324 (                    |open_logic16        ) out lo 
+
+ gpio-325 (                    |open_logic16        ) out hi 
+
+
+
+gpiochip1: GPIOs 704-735, parent: platform/7096500.pinctrl, 7096500.pinctrl:
+
+3604000.pinctrl  pinctrl-devices  pinctrl-maps
+
+7096500.pinctrl  pinctrl-handles
+
+[  730.157533] logic16_access: loading out-of-tree module taints kernel.
+
+[  730.160287] remoteproc remoteproc0: powering up rt_mpu_a7_rproc
+
+[  730.160695] remoteproc remoteproc0: using private firmware, skip checking here
+
+[  730.160714] remoteproc remoteproc0: Booting fw image open-logic16.elf, size 129128
+
+[  730.160742] remoteproc remoteproc0: load fw from filesystem, filename: open-logic16.elf
+
+[  730.160814] remoteproc remoteproc0: firmware version: open_logic16 ABI3
+
+[  730.258837] CPU3 killed.
+
+[  730.259738] remoteproc remoteproc0: remote processor rt_mpu_a7_rproc is now up
+
+
+
+__L16_RESULT:0
+
+root@TQ153:~# 

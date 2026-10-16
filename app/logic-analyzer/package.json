@@ -1,0 +1,11 @@
+{
+  "name": "open-logic16",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "start": "node server.mjs",
+    "test": "node --test test/capture.test.mjs test/server.test.mjs test/device.test.mjs"
+  },
+  "engines": { "node": ">=18" }
+}

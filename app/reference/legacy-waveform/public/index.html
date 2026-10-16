@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>RT_MPU 实时波形</title><link rel="stylesheet" href="/uplot.css"><link rel="stylesheet" href="/style.css"></head>
+<body>
+<header><strong>RT_MPU · 采样波形</strong><span id="connection">连接中</span><span id="deviceHealth">装置状态待核对</span><span id="acquisitionMode">采集模式待核对</span><span id="displayState" class="display-state" data-state="waiting" role="status">等待页面数据</span><span id="source">—</span><span id="address"></span><a href="/workspace/" title="开关成组选择、双布局与同步缩放">新版监测</a><a href="http://127.0.0.1:8099/" target="_blank" rel="noopener" title="按需读取采集核与 Linux 线程诊断">运行诊断</a><button id="fullscreen" title="全屏波形" aria-label="全屏波形"><i data-lucide="expand"></i></button><button id="settings" title="通道名称与换算系数" aria-label="通道名称与换算系数"><i data-lucide="settings-2"></i></button></header>
+<main><aside>
+<div class="section-title"><h2>通道</h2><span id="selectedCount"></span></div>
+<label>板卡<select id="group"><option value="all">全部通道</option><option value="公共板">公共板</option></select></label>
+<div id="channelList" class="channel-list"></div>
+<div class="section-title"><h2>触发</h2><span id="triggerState">待触发</span></div>
+<label>信号<select id="channel"></select></label>
+<label>条件<select id="condition"><option value="abs_gt">绝对值大于</option><option value="gt">大于</option><option value="lt">小于</option><option value="rising">上升穿越</option><option value="falling">下降穿越</option><option value="cycle_diff">与前周波同相位差值</option></select></label>
+<div class="pair"><label><span id="thresholdLabel">阈值 / ADC码</span><input id="threshold" type="number" value="100" min="-32768" max="32767"></label><label>连续样点<input id="consecutive" type="number" value="3" min="1" max="128"></label></div>
+<label id="referenceCyclesField" hidden>比较同相位样点<select id="referenceCycles"><option value="1">前 1 周波（50 Hz / 20 ms）</option><option value="2">前 2 周波（50 Hz / 40 ms）</option></select></label>
+<div class="pair"><label>触发前 / ms<input id="preMs" type="number" value="100" min="0" max="1000"></label><label>后录模式<select id="postMode"><option value="ms">毫秒</option><option value="cycles">周波</option></select></label></div>
+<div class="pair"><label id="postMsField">触发后 / ms<input id="postMs" type="number" value="100" min="0" max="1000"></label><label id="postCyclesField" hidden>触发后 / 周波<input id="postCycles" type="number" value="10" min="0" max="50"></label></div>
+<p id="triggerHelp" class="trigger-help">连续 N 点满足阈值后记录，完成后暂停显示；装置采集继续。</p>
+<div class="actions display-actions"><button id="arm" title="重新布防" aria-pressed="false" disabled><i data-lucide="crosshair"></i>布防</button><button id="resume" title="恢复实时显示并取消布防" aria-pressed="false" disabled><i data-lucide="play"></i>继续</button><button id="pause" title="只暂停显示，不停止装置读回" aria-label="暂停显示" aria-pressed="false" disabled><i data-lucide="pause"></i>暂停</button></div>
+<div id="displayDetail" class="display-detail">正在连接本机服务，等待显示状态。</div>
+<div class="section-title"><h2>运行状态</h2><button id="clearStats" title="清运行状态" aria-label="清运行状态"><i data-lucide="eraser"></i></button></div>
+<div id="connectionDetail" role="status"></div><dl id="stats"></dl><div id="irqPeak" class="peak-detail"></div>
+<div class="section-title"><h2>运行诊断</h2></div><dl id="runtimeDiagnostics"></dl><div id="runtimeNote" class="display-detail" role="status">等待同会话诊断快照。</div>
+<div class="section-title"><h2>ADC 当前会话</h2></div><dl id="adcDiagnostics"></dl>
+</aside><section class="workspace">
+<nav><div class="tabs"><button class="active" id="timeTab">波形</button><button id="fftTab">频谱</button></div><div class="tabs"><button class="active" id="rawMode">ADC码</button><button id="engineeringMode">A / V</button></div>
+<label class="inline">窗口<select id="windowMs"><option value="100">100 ms</option><option value="200">200 ms</option><option value="500" selected>500 ms</option><option value="1000">1 s</option><option value="2000">2 s / 100 周波</option><option value="4000">4 s</option><option value="10000">10 s</option></select></label>
+<div class="tools"><button id="zoomAxis" title="横向缩放" aria-label="缩放方向"><i data-lucide="move-horizontal"></i></button><button id="zoomIn" title="放大"><i data-lucide="zoom-in"></i></button><button id="zoomOut" title="缩小"><i data-lucide="zoom-out"></i></button><button id="reset" title="复位视图"><i data-lucide="maximize"></i></button><button id="cursorA" title="游标 A" aria-label="游标 A"><i data-lucide="text-cursor"></i><small>A</small></button><button id="cursorB" title="游标 B" aria-label="游标 B"><i data-lucide="text-cursor"></i><small>B</small></button><button id="export" title="导出 COMTRADE CFG / DAT"><i data-lucide="download"></i></button></div></nav>
+<div id="rReadbackState" class="r-readback-state" role="status">采集核读回诊断待核对</div>
+<div id="plot"></div>
+<footer><span id="extent"></span><span id="cursorReadout"></span><span id="spectrumPeak"></span></footer>
+<div class="section-title"><h2>通道测量</h2><span id="measurementWindow"></span></div>
+<p class="measurement-help">交流电流比较 50 Hz 基波 RMS（估计）和总交流 RMS（去直流）；A / V 按通道系数换算，未标定不作实测安培验收。测 THD 请选择至少 500 ms 窗口；弱信号 / 噪声中的频带能量或 THD 不能证明有真实 50 Hz 电流。长窗口波形保留桶内峰值抽点显示，测量与 FFT 使用原始样点。暂停或故障时保留的测量属于冻结 / 末次窗口。</p>
+<details class="measurement-help"><summary>FFT 口径与窗口</summary>总交流 RMS 使用完整有符号窗口；50 Hz 基波和 2～25 次 THD 使用末尾最多 2048 点去直流 Hann FFT 三格频带能量，不跟踪实际频率。基波至少 4 周波，THD 至少 10 周波。6400 Hz 下 100 / 200 ms 窗口实际用 512 / 1024 点（80 / 160 ms），THD 不足；500 ms 及以上用 2048 点（320 ms）。有限窗、偏频和噪声影响估计；ADC码 / A / V 只改变曲线纵轴。</details>
+<div id="measurementNotice" class="measurement-notice" role="status"></div>
+<div class="table-scroll"><table class="measurements"><thead><tr><th>通道</th><th>ADC值</th><th>瞬时值</th><th title="包含交流与直流分量的有效值">总 RMS（含直流）</th><th title="完整当前窗口去除直流分量后的有效值">总交流 RMS</th><th title="标称50Hz；去直流Hann窗三格FFT频带能量估计，非频率跟踪">50 Hz 基波 RMS（估计）</th><th title="2～25次谐波有效值的平方和开方 / 基波有效值，至少10周波">THD / %</th><th>直流分量</th><th>最小</th><th>最大</th><th>峰峰值</th><th>频率 / Hz</th><th>标定</th><th>窗口读回</th><th>FFT 窗口 / 状态</th></tr></thead><tbody id="measurements"></tbody></table></div>
+<details class="digital-section"><summary>数字量</summary><div id="digital"></div></details>
+<div class="events"><div class="section-title"><h2>事件记录</h2><span id="protocol"></span></div><div id="events"></div></div>
+</section></main>
+<dialog id="profileDialog"><form id="profileForm"><div class="section-title"><h2>通道设置</h2><button type="button" id="closeProfile" title="关闭" aria-label="关闭"><i data-lucide="x"></i></button></div><label>通道<select id="profileChannel"></select></label><div id="profilePhysical" class="muted"></div><label>名称<input id="profileName" maxlength="64" required></label><div class="pair"><label>单位<select id="profileUnit"><option>A</option><option>V</option><option>code</option></select></label><label>状态<select id="profileCalibration"><option value="nominal">标称 / 未校准</option><option value="manual">手工设置</option><option value="adc_pin">ADC引脚电压</option></select></label></div><label>a / 每码<input id="profileA" type="number" step="any" min="0.000000000001" required></label><label>b / 偏置<input id="profileB" type="number" step="any" required></label><div class="actions"><button type="submit"><i data-lucide="save"></i>保存</button><button type="button" id="resetProfile" title="恢复默认通道表" aria-label="恢复默认通道表"><i data-lucide="rotate-ccw"></i></button></div></form></dialog>
+<div id="message" role="status"></div>
+<script src="/uplot.js"></script><script src="/lucide.js"></script><script src="/fft.js"></script><script src="/spectrum.js"></script><script src="/app.js"></script></body></html>

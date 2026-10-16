@@ -1,0 +1,73 @@
+ls /sys/kernel/debug && cat /sys/kernel/debug/pinctrl/3604000.pinctrl/pinconf-pins | grep -E "PA1[23456789]|PD1[23456789]|PA21|PD2[01]|PK[345]"; printf '\n__L16_RESULT:%d\n' $?
+
+asoc                dri                 pwm
+
+bdi                 extfrag             regmap
+
+block               fault_around_bytes  regulator
+
+bluetooth           gpio                remoteproc
+
+ccudbg              hid                 sleep_time
+
+clear_warn_once     ieee80211           stmmaceth
+
+clk                 iio                 suspend_stats
+
+device_component    memblock            usb
+
+devices_deferred    mmc0                wakeup_sources
+
+dma_buf             opp
+
+dmaengine           pinctrl
+
+pin 12 (PA12): input bias disabled, output drive strength (20 mA), input debounce (0 usec)
+
+pin 13 (PA13): input bias disabled, output drive strength (20 mA), input debounce (0 usec)
+
+pin 14 (PA14): input bias disabled, output drive strength (20 mA), input debounce (0 usec)
+
+pin 15 (PA15): input bias disabled, output drive strength (20 mA), input debounce (0 usec)
+
+pin 16 (PA16): input bias disabled, output drive strength (20 mA), input debounce (0 usec)
+
+pin 17 (PA17): input bias disabled, output drive strength (20 mA), input debounce (0 usec)
+
+pin 18 (PA18): input bias disabled, output drive strength (20 mA), input debounce (0 usec)
+
+pin 19 (PA19): input bias disabled, output drive strength (20 mA), input debounce (0 usec)
+
+pin 21 (PA21): input bias disabled, output drive strength (20 mA), input debounce (0 usec)
+
+pin 108 (PD12): input bias disabled, output drive strength (20 mA), input debounce (0 usec)
+
+pin 109 (PD13): input bias disabled, output drive strength (20 mA), input debounce (0 usec)
+
+pin 110 (PD14): input bias disabled, output drive strength (20 mA), input debounce (0 usec)
+
+pin 111 (PD15): input bias disabled, output drive strength (20 mA), input debounce (0 usec)
+
+pin 112 (PD16): input bias disabled, output drive strength (20 mA), input debounce (0 usec)
+
+pin 113 (PD17): input bias disabled, output drive strength (20 mA), input debounce (0 usec)
+
+pin 114 (PD18): input bias disabled, output drive strength (20 mA), input debounce (0 usec)
+
+pin 115 (PD19): input bias disabled, output drive strength (20 mA), input debounce (0 usec)
+
+pin 116 (PD20): input bias disabled, output drive strength (20 mA), input debounce (0 usec)
+
+pin 117 (PD21): input bias disabled, output drive strength (20 mA), input debounce (0 usec)
+
+pin 323 (PK3): input bias disabled, output drive strength (20 mA), input debounce (0 usec)
+
+pin 324 (PK4): input bias disabled, output drive strength (20 mA), input debounce (0 usec)
+
+pin 325 (PK5): input bias disabled, output drive strength (20 mA), input debounce (0 usec)
+
+
+
+__L16_RESULT:0
+
+root@TQ153:~# 

@@ -1,0 +1,9 @@
+{
+  "deviceConnected": true,
+  "captureState": "idle",
+  "sampleCount": 0,
+  "liveWord": "0xFFFF",
+  "liveReadSequence": 5353064,
+  "liveErrorCode": 0,
+  "liveMonitorEnabled": true
+}

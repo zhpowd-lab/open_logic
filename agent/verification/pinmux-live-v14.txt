@@ -1,0 +1,53 @@
+cat /sys/kernel/debug/pinctrl/3604000.pinctrl/pinmux-pins | grep -E "PA1[23456789]|PD1[23456789]|PA21|PD2[01]|PK[345]" && ls /sys/kernel/debug/sunxi_pinctrl; printf '\n__L16_RESULT:%d\n' $?
+
+pin 12 (PA12): GPIO 3604000.pinctrl:12
+
+pin 13 (PA13): GPIO 3604000.pinctrl:13
+
+pin 14 (PA14): GPIO 3604000.pinctrl:14
+
+pin 15 (PA15): GPIO 3604000.pinctrl:15
+
+pin 16 (PA16): GPIO 3604000.pinctrl:16
+
+pin 17 (PA17): GPIO 3604000.pinctrl:17
+
+pin 18 (PA18): GPIO 3604000.pinctrl:18
+
+pin 19 (PA19): GPIO 3604000.pinctrl:19
+
+pin 21 (PA21): GPIO 3604000.pinctrl:21
+
+pin 108 (PD12): GPIO 3604000.pinctrl:108
+
+pin 109 (PD13): GPIO 3604000.pinctrl:109
+
+pin 110 (PD14): GPIO 3604000.pinctrl:110
+
+pin 111 (PD15): GPIO 3604000.pinctrl:111
+
+pin 112 (PD16): GPIO 3604000.pinctrl:112
+
+pin 113 (PD17): GPIO 3604000.pinctrl:113
+
+pin 114 (PD18): GPIO 3604000.pinctrl:114
+
+pin 115 (PD19): GPIO 3604000.pinctrl:115
+
+pin 116 (PD20): GPIO 3604000.pinctrl:116
+
+pin 117 (PD21): GPIO 3604000.pinctrl:117
+
+pin 323 (PK3): GPIO 3604000.pinctrl:323
+
+pin 324 (PK4): GPIO 3604000.pinctrl:324
+
+pin 325 (PK5): GPIO 3604000.pinctrl:325
+
+ls: /sys/kernel/debug/sunxi_pinctrl: No such file or directory
+
+
+
+__L16_RESULT:1
+
+root@TQ153:~# 

@@ -1,0 +1,6 @@
+{
+  "samplePeriodNs": 1000,
+  "sequenceStart": 5,
+  "droppedSamples": 3,
+  "sampleCount": 1000009
+}

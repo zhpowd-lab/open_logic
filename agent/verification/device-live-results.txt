@@ -1,0 +1,51 @@
+### Result
+{"passed":12,"checks":["真实装置显示独立实时监视区","实时监视保留16路和YX映射","CPU3读取计数持续推进，网页只读刷新","网页当前字与装置原始字一致且没有总线错误","每路当前状态按原码bit读取，不倒相","暂停监视冻结页面计数","网页暂停后CPU3仍读取","持续监视没有新建或覆盖波形段","390像素窄屏监视无横向溢出","窄屏完整显示16路","真实实时监视没有JavaScript异常","监视启停及页面操作没有发送装置控制命令"],"errors":[],"word":"0xffff","captureCount":0}
+### Ran Playwright code
+```js
+await (async page => {
+  const checks = [], errors = [], methods = [];
+  const CHANNELS = 16;
+  const PAUSE_CHECK_MS = 500;
+  const DESKTOP = { width: 1440, height: 1080 };
+  const NARROW = { width: 390, height: 844 };
+  const check = (ok, message) => { if (!ok) throw new Error(message); checks.push(message); };
+  page.on('pageerror', error => errors.push(error.message));
+  page.on('request', request => methods.push(request.method()));
+  await page.setViewportSize(DESKTOP);
+  await page.goto('http://127.0.0.1:8102/');
+  await page.waitForFunction(() => document.querySelector('#monitorWord').dataset.word !== undefined);
+  check(await page.locator('#livePanel').isVisible(), '真实装置显示独立实时监视区');
+  check(await page.locator('.monitor-bit').count() === CHANNELS, '实时监视保留16路和YX映射');
+  const before = await page.locator('#monitorStatus').getAttribute('data-sequence');
+  await page.waitForFunction(previous => document.querySelector('#monitorStatus').dataset.sequence !== previous, before);
+  check(true, 'CPU3读取计数持续推进，网页只读刷新');
+  const info = await page.request.get('http://127.0.0.1:8102/api/capture').then(response => response.json());
+  const word = Number(await page.locator('#monitorWord').getAttribute('data-word'));
+  check(word === info.liveWord && info.liveErrorCode === 0, '网页当前字与装置原始字一致且没有总线错误');
+  const bits = await page.locator('.monitor-bit output').allTextContents();
+  check(bits.every((value, channel) => Number(value) === ((word >> channel) & 1)), '每路当前状态按原码bit读取，不倒相');
+  await page.locator('#monitorToggle').click();
+  const frozen = await page.locator('#monitorStatus').getAttribute('data-sequence');
+  await page.waitForTimeout(PAUSE_CHECK_MS);
+  check(await page.locator('#monitorStatus').getAttribute('data-sequence') === frozen, '暂停监视冻结页面计数');
+  const continued = await page.request.get('http://127.0.0.1:8102/api/capture').then(response => response.json());
+  check(continued.liveReadSequence > Number(frozen), '网页暂停后CPU3仍读取');
+  check(continued.captureId === info.captureId && continued.sampleCount === info.sampleCount, '持续监视没有新建或覆盖波形段');
+  await page.locator('#monitorToggle').click();
+  await page.waitForFunction(previous => document.querySelector('#monitorStatus').dataset.sequence !== previous, frozen);
+  await page.screenshot({ path: 'output/playwright/device-live-desktop.png', fullPage: true });
+  await page.setViewportSize(NARROW);
+  await page.reload();
+  await page.waitForFunction(() => document.querySelector('#monitorWord').dataset.word !== undefined);
+  check(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth), '390像素窄屏监视无横向溢出');
+  check(await page.locator('.monitor-bit').count() === CHANNELS, '窄屏完整显示16路');
+  await page.screenshot({ path: 'output/playwright/device-live-narrow.png', fullPage: true });
+  await page.locator('#theme').click();
+  await page.screenshot({ path: 'output/playwright/device-live-narrow-light.png', fullPage: true });
+  check(errors.length === 0, '真实实时监视没有JavaScript异常');
+  check(methods.every(method => method === 'GET'), '监视启停及页面操作没有发送装置控制命令');
+  await page.setViewportSize(DESKTOP);
+  return { passed: checks.length, checks, errors, word: '0x' + word.toString(16), captureCount: continued.sampleCount };
+}
+)(page);
+```

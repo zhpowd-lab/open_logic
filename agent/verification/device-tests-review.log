@@ -1,0 +1,18 @@
++ gcc -std=gnu11 -O2 -Wall -Wextra -Werror -DL16_HOST_TEST -fsanitize=address,undefined -fno-omit-frame-pointer test/board-test.c firmware/board.c -o ../board-test-review
++ ../board-test-review
+PASS: 16-bit RX, 10,000 reads without CS/GPIO writes; input probe preserves mux and CS; bounded timeout and layout
++ gcc -std=gnu11 -O2 -Wall -Wextra -Werror -DL16_HOST_TEST -fsanitize=address,undefined -fno-omit-frame-pointer test/capture-test.c -o ../capture-test-review
++ ../capture-test-review
+PASS: cold preparation, tick rollover, full depth, fault prefix; live reads preserve frozen data and stop on bus error
++ PYTHONDONTWRITEBYTECODE=1
++ python3 test/service-test.py
+test_commands_and_stale_capture (__main__.ServiceTest) ... ok
+test_contract (__main__.ServiceTest) ... ok
+test_live_monitor_independent_of_capture (__main__.ServiceTest) ... ok
+test_reject_bad_requests (__main__.ServiceTest) ... ok
+test_unknown_before_arm (__main__.ServiceTest) ... ok
+
+----------------------------------------------------------------------
+Ran 5 tests in 1.501s
+
+OK

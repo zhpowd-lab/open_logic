@@ -1,0 +1,10 @@
+# 保留旧工程编码、换行和固件字节，避免改变已有 SHA256 清单。
+* -text
+*.elf binary
+*.ko binary
+*.pdf binary
+*.png binary
+*.tar binary
+*.gz binary
+*.zip binary
+*.u16 binary

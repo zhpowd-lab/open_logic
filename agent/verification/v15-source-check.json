@@ -1,0 +1,74 @@
+[
+  {
+    "file": "./build.sh",
+    "matches": true
+  },
+  {
+    "file": "./firmware/board.c",
+    "matches": true
+  },
+  {
+    "file": "./firmware/board-registers.h",
+    "matches": true
+  },
+  {
+    "file": "./firmware/cache.S",
+    "matches": true
+  },
+  {
+    "file": "./firmware/link.ld",
+    "matches": true
+  },
+  {
+    "file": "./firmware/main.c",
+    "matches": true
+  },
+  {
+    "file": "./firmware/memory.c",
+    "matches": true
+  },
+  {
+    "file": "./firmware/platform.h",
+    "matches": true
+  },
+  {
+    "file": "./firmware/start.S",
+    "matches": true
+  },
+  {
+    "file": "./linux/access.c",
+    "matches": true
+  },
+  {
+    "file": "./linux/Makefile",
+    "matches": true
+  },
+  {
+    "file": "./linux/service.py",
+    "matches": false
+  },
+  {
+    "file": "./logic16.h",
+    "matches": true
+  },
+  {
+    "file": "./logic16-layout.h",
+    "matches": true
+  },
+  {
+    "file": "./run-device.sh",
+    "matches": true
+  },
+  {
+    "file": "./test/board-test.c",
+    "matches": false
+  },
+  {
+    "file": "./test/capture-test.c",
+    "matches": true
+  },
+  {
+    "file": "./test/service-test.py",
+    "matches": false
+  }
+]

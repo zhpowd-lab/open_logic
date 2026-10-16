@@ -1,0 +1,417 @@
+{
+  "files": 82,
+  "local_match": 82,
+  "source_match": 82,
+  "results": [
+    {
+      "path": "app\\reference\\docs\\T153-16路总线遥信与定频逻辑采集-20261015.md",
+      "local_matches_snapshot": true,
+      "source_matches_snapshot": true
+    },
+    {
+      "path": "app\\reference\\docs\\T153-A7独立采集运行与示波器基准-20261014.md",
+      "local_matches_snapshot": true,
+      "source_matches_snapshot": true
+    },
+    {
+      "path": "app\\reference\\docs\\T153-A7实时输入完整迁移与SDK配套-20261016.md",
+      "local_matches_snapshot": true,
+      "source_matches_snapshot": true
+    },
+    {
+      "path": "app\\reference\\legacy-a7\\acquisition\\access.h",
+      "local_matches_snapshot": true,
+      "source_matches_snapshot": true
+    },
+    {
+      "path": "app\\reference\\legacy-a7\\acquisition\\acquisition.c",
+      "local_matches_snapshot": true,
+      "source_matches_snapshot": true
+    },
+    {
+      "path": "app\\reference\\legacy-a7\\acquisition\\acquisition.h",
+      "local_matches_snapshot": true,
+      "source_matches_snapshot": true
+    },
+    {
+      "path": "app\\reference\\legacy-a7\\acquisition\\aux_boot_time.h",
+      "local_matches_snapshot": true,
+      "source_matches_snapshot": true
+    },
+    {
+      "path": "app\\reference\\legacy-a7\\acquisition\\board.c",
+      "local_matches_snapshot": true,
+      "source_matches_snapshot": true
+    },
+    {
+      "path": "app\\reference\\legacy-a7\\acquisition\\board.h",
+      "local_matches_snapshot": true,
+      "source_matches_snapshot": true
+    },
+    {
+      "path": "app\\reference\\legacy-a7\\acquisition\\bus_di.h",
+      "local_matches_snapshot": true,
+      "source_matches_snapshot": true
+    },
+    {
+      "path": "app\\reference\\legacy-a7\\acquisition\\cache.S",
+      "local_matches_snapshot": true,
+      "source_matches_snapshot": true
+    },
+    {
+      "path": "app\\reference\\legacy-a7\\acquisition\\link.ld",
+      "local_matches_snapshot": true,
+      "source_matches_snapshot": true
+    },
+    {
+      "path": "app\\reference\\legacy-a7\\acquisition\\linux_access.c",
+      "local_matches_snapshot": true,
+      "source_matches_snapshot": true
+    },
+    {
+      "path": "app\\reference\\legacy-a7\\acquisition\\linux_realtime_io.c",
+      "local_matches_snapshot": true,
+      "source_matches_snapshot": true
+    },
+    {
+      "path": "app\\reference\\legacy-a7\\acquisition\\linux_realtime_io.h",
+      "local_matches_snapshot": true,
+      "source_matches_snapshot": true
+    },
+    {
+      "path": "app\\reference\\legacy-a7\\acquisition\\linux_transport.c",
+      "local_matches_snapshot": true,
+      "source_matches_snapshot": true
+    },
+    {
+      "path": "app\\reference\\legacy-a7\\acquisition\\linux_transport.h",
+      "local_matches_snapshot": true,
+      "source_matches_snapshot": true
+    },
+    {
+      "path": "app\\reference\\legacy-a7\\acquisition\\main.c",
+      "local_matches_snapshot": true,
+      "source_matches_snapshot": true
+    },
+    {
+      "path": "app\\reference\\legacy-a7\\acquisition\\memory.c",
+      "local_matches_snapshot": true,
+      "source_matches_snapshot": true
+    },
+    {
+      "path": "app\\reference\\legacy-a7\\acquisition\\mmu.c",
+      "local_matches_snapshot": true,
+      "source_matches_snapshot": true
+    },
+    {
+      "path": "app\\reference\\legacy-a7\\acquisition\\native_progress.h",
+      "local_matches_snapshot": true,
+      "source_matches_snapshot": true
+    },
+    {
+      "path": "app\\reference\\legacy-a7\\acquisition\\protocol.h",
+      "local_matches_snapshot": true,
+      "source_matches_snapshot": true
+    },
+    {
+      "path": "app\\reference\\legacy-a7\\acquisition\\rates.h",
+      "local_matches_snapshot": true,
+      "source_matches_snapshot": true
+    },
+    {
+      "path": "app\\reference\\legacy-a7\\acquisition\\realtime_io_ioctl.h",
+      "local_matches_snapshot": true,
+      "source_matches_snapshot": true
+    },
+    {
+      "path": "app\\reference\\legacy-a7\\acquisition\\realtime_io.c",
+      "local_matches_snapshot": true,
+      "source_matches_snapshot": true
+    },
+    {
+      "path": "app\\reference\\legacy-a7\\acquisition\\realtime_io.h",
+      "local_matches_snapshot": true,
+      "source_matches_snapshot": true
+    },
+    {
+      "path": "app\\reference\\legacy-a7\\acquisition\\sample_time.h",
+      "local_matches_snapshot": true,
+      "source_matches_snapshot": true
+    },
+    {
+      "path": "app\\reference\\legacy-a7\\acquisition\\service_window.h",
+      "local_matches_snapshot": true,
+      "source_matches_snapshot": true
+    },
+    {
+      "path": "app\\reference\\legacy-a7\\acquisition\\test_client.c",
+      "local_matches_snapshot": true,
+      "source_matches_snapshot": true
+    },
+    {
+      "path": "app\\reference\\legacy-a7\\rt-include\\rt_acquisition_board.h",
+      "local_matches_snapshot": true,
+      "source_matches_snapshot": true
+    },
+    {
+      "path": "app\\reference\\legacy-a7\\rt-include\\rt_acquisition_config.h",
+      "local_matches_snapshot": true,
+      "source_matches_snapshot": true
+    },
+    {
+      "path": "app\\reference\\legacy-a7\\rt-include\\rt_acquisition_diagnostics.h",
+      "local_matches_snapshot": true,
+      "source_matches_snapshot": true
+    },
+    {
+      "path": "app\\reference\\legacy-a7\\rt-include\\rt_acquisition_rate.h",
+      "local_matches_snapshot": true,
+      "source_matches_snapshot": true
+    },
+    {
+      "path": "app\\reference\\legacy-a7\\rt-include\\rt_acquisition_target.h",
+      "local_matches_snapshot": true,
+      "source_matches_snapshot": true
+    },
+    {
+      "path": "app\\reference\\legacy-a7\\rt-include\\rt_acquisition.h",
+      "local_matches_snapshot": true,
+      "source_matches_snapshot": true
+    },
+    {
+      "path": "app\\reference\\legacy-a7\\rt-include\\rt_adc_lbc_timing.h",
+      "local_matches_snapshot": true,
+      "source_matches_snapshot": true
+    },
+    {
+      "path": "app\\reference\\legacy-a7\\rt-include\\rt_adc_scope_protocol.h",
+      "local_matches_snapshot": true,
+      "source_matches_snapshot": true
+    },
+    {
+      "path": "app\\reference\\legacy-a7\\rt-include\\rt_clock_math.h",
+      "local_matches_snapshot": true,
+      "source_matches_snapshot": true
+    },
+    {
+      "path": "app\\reference\\legacy-a7\\rt-include\\rt_sample_device.h",
+      "local_matches_snapshot": true,
+      "source_matches_snapshot": true
+    },
+    {
+      "path": "app\\reference\\legacy-a7\\rt-include\\rt_sample_recovery.h",
+      "local_matches_snapshot": true,
+      "source_matches_snapshot": true
+    },
+    {
+      "path": "app\\reference\\legacy-a7\\rt-include\\rt_sample_stream.h",
+      "local_matches_snapshot": true,
+      "source_matches_snapshot": true
+    },
+    {
+      "path": "app\\reference\\legacy-a7\\rt-include\\rt_shared_abi.h",
+      "local_matches_snapshot": true,
+      "source_matches_snapshot": true
+    },
+    {
+      "path": "app\\reference\\legacy-a7\\rt-include\\rt_shared_ring.h",
+      "local_matches_snapshot": true,
+      "source_matches_snapshot": true
+    },
+    {
+      "path": "app\\reference\\legacy-a7\\rt-include\\rt_software_clock.h",
+      "local_matches_snapshot": true,
+      "source_matches_snapshot": true
+    },
+    {
+      "path": "app\\reference\\legacy-a7\\tests\\acquisition_test.c",
+      "local_matches_snapshot": true,
+      "source_matches_snapshot": true
+    },
+    {
+      "path": "app\\reference\\legacy-a7\\tests\\board_test.c",
+      "local_matches_snapshot": true,
+      "source_matches_snapshot": true
+    },
+    {
+      "path": "app\\reference\\legacy-a7\\tests\\bus_di_test.c",
+      "local_matches_snapshot": true,
+      "source_matches_snapshot": true
+    },
+    {
+      "path": "app\\reference\\legacy-a7\\tests\\busy_window_test.c",
+      "local_matches_snapshot": true,
+      "source_matches_snapshot": true
+    },
+    {
+      "path": "app\\reference\\legacy-a7\\tests\\client_copy_test.c",
+      "local_matches_snapshot": true,
+      "source_matches_snapshot": true
+    },
+    {
+      "path": "app\\reference\\legacy-a7\\tests\\memory_test.c",
+      "local_matches_snapshot": true,
+      "source_matches_snapshot": true
+    },
+    {
+      "path": "app\\reference\\legacy-a7\\tests\\native_progress_test.c",
+      "local_matches_snapshot": true,
+      "source_matches_snapshot": true
+    },
+    {
+      "path": "app\\reference\\legacy-a7\\tests\\rates_test.c",
+      "local_matches_snapshot": true,
+      "source_matches_snapshot": true
+    },
+    {
+      "path": "app\\reference\\legacy-a7\\tests\\realtime_io_test.c",
+      "local_matches_snapshot": true,
+      "source_matches_snapshot": true
+    },
+    {
+      "path": "app\\reference\\legacy-a7\\tests\\sample_time_test.c",
+      "local_matches_snapshot": true,
+      "source_matches_snapshot": true
+    },
+    {
+      "path": "app\\reference\\legacy-a7\\tests\\service_window_test.c",
+      "local_matches_snapshot": true,
+      "source_matches_snapshot": true
+    },
+    {
+      "path": "app\\reference\\legacy-waveform\\capture-state.js",
+      "local_matches_snapshot": true,
+      "source_matches_snapshot": true
+    },
+    {
+      "path": "app\\reference\\legacy-waveform\\capture.js",
+      "local_matches_snapshot": true,
+      "source_matches_snapshot": true
+    },
+    {
+      "path": "app\\reference\\legacy-waveform\\channels.js",
+      "local_matches_snapshot": true,
+      "source_matches_snapshot": true
+    },
+    {
+      "path": "app\\reference\\legacy-waveform\\debug-diagnostics.js",
+      "local_matches_snapshot": true,
+      "source_matches_snapshot": true
+    },
+    {
+      "path": "app\\reference\\legacy-waveform\\debug-server.js",
+      "local_matches_snapshot": true,
+      "source_matches_snapshot": true
+    },
+    {
+      "path": "app\\reference\\legacy-waveform\\device-link.js",
+      "local_matches_snapshot": true,
+      "source_matches_snapshot": true
+    },
+    {
+      "path": "app\\reference\\legacy-waveform\\package-lock.json",
+      "local_matches_snapshot": true,
+      "source_matches_snapshot": true
+    },
+    {
+      "path": "app\\reference\\legacy-waveform\\package.json",
+      "local_matches_snapshot": true,
+      "source_matches_snapshot": true
+    },
+    {
+      "path": "app\\reference\\legacy-waveform\\README.md",
+      "local_matches_snapshot": true,
+      "source_matches_snapshot": true
+    },
+    {
+      "path": "app\\reference\\legacy-waveform\\server.js",
+      "local_matches_snapshot": true,
+      "source_matches_snapshot": true
+    },
+    {
+      "path": "app\\reference\\legacy-waveform\\spectrum.js",
+      "local_matches_snapshot": true,
+      "source_matches_snapshot": true
+    },
+    {
+      "path": "app\\reference\\legacy-waveform\\THIRD_PARTY.md",
+      "local_matches_snapshot": true,
+      "source_matches_snapshot": true
+    },
+    {
+      "path": "app\\reference\\legacy-waveform\\public\\app.js",
+      "local_matches_snapshot": true,
+      "source_matches_snapshot": true
+    },
+    {
+      "path": "app\\reference\\legacy-waveform\\public\\debug.css",
+      "local_matches_snapshot": true,
+      "source_matches_snapshot": true
+    },
+    {
+      "path": "app\\reference\\legacy-waveform\\public\\debug.html",
+      "local_matches_snapshot": true,
+      "source_matches_snapshot": true
+    },
+    {
+      "path": "app\\reference\\legacy-waveform\\public\\debug.js",
+      "local_matches_snapshot": true,
+      "source_matches_snapshot": true
+    },
+    {
+      "path": "app\\reference\\legacy-waveform\\public\\fft.bundle.js",
+      "local_matches_snapshot": true,
+      "source_matches_snapshot": true
+    },
+    {
+      "path": "app\\reference\\legacy-waveform\\public\\index.html",
+      "local_matches_snapshot": true,
+      "source_matches_snapshot": true
+    },
+    {
+      "path": "app\\reference\\legacy-waveform\\public\\style.css",
+      "local_matches_snapshot": true,
+      "source_matches_snapshot": true
+    },
+    {
+      "path": "app\\reference\\legacy-waveform\\public\\workspace-model.js",
+      "local_matches_snapshot": true,
+      "source_matches_snapshot": true
+    },
+    {
+      "path": "app\\reference\\legacy-waveform\\public\\workspace-worker.js",
+      "local_matches_snapshot": true,
+      "source_matches_snapshot": true
+    },
+    {
+      "path": "app\\reference\\legacy-waveform\\public\\workspace.css",
+      "local_matches_snapshot": true,
+      "source_matches_snapshot": true
+    },
+    {
+      "path": "app\\reference\\legacy-waveform\\public\\workspace.html",
+      "local_matches_snapshot": true,
+      "source_matches_snapshot": true
+    },
+    {
+      "path": "app\\reference\\legacy-waveform\\public\\workspace.js",
+      "local_matches_snapshot": true,
+      "source_matches_snapshot": true
+    },
+    {
+      "path": "app\\reference\\tools\\capture_a7_native.py",
+      "local_matches_snapshot": true,
+      "source_matches_snapshot": true
+    },
+    {
+      "path": "app\\reference\\tools\\export_bus_di.py",
+      "local_matches_snapshot": true,
+      "source_matches_snapshot": true
+    },
+    {
+      "path": "app\\reference\\tools\\test_export_bus_di.py",
+      "local_matches_snapshot": true,
+      "source_matches_snapshot": true
+    }
+  ]
+}

@@ -1,0 +1,11 @@
+.cursor/
+node_modules/
+__pycache__/
+*.pyc
+agent/.playwright-cli/
+agent/build/
+agent/device-source.tar.gz
+agent/release-v*.tar.gz
+agent/recovery/*.ko
+agent/verification/service.pid
+agent/publish/work/

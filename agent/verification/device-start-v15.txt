@@ -1,0 +1,41 @@
+curl -fsS http://127.0.0.1:8102/api/capture | python3 -c "import sys,json; m=json.load(sys.stdin); assert m[\"captureState\"] != \"running\" and m[\"sampleCount\"] == 0" && mkdir /app/open_logic/releases/20261016-v15 && tar -xf /app/open_logic/release-v15.tar -C /app/open_logic/releases/20261016-v15 && cd /app/open_logic/releases/20261016-v15 && sha256sum -c SHA256SUMS && sh ../20261016-v14/run-device.sh stop && sh run-device.sh start && sh run-device.sh status; printf '\n__L16_RESULT:%d\n' $?
+
+logic16.elf: OK
+
+logic16_access.ko: OK
+
+service.py: OK
+
+run-device.sh: OK
+
+采集资源已释放
+
+CPU3 已归还 Linux，本项目资源已释放
+
+curl: (7) Failed to connect to 127.0.0.1 port 8102 after 0 ms: Connection refused
+
+curl: (7) Failed to connect to 127.0.0.1 port 8102 after 0 ms: Connection refused
+
+curl: (7) Failed to connect to 127.0.0.1 port 8102 after 0 ms: Connection refused
+
+curl: (7) Failed to connect to 127.0.0.1 port 8102 after 0 ms: Connection refused
+
+curl: (7) Failed to connect to 127.0.0.1 port 8102 after 0 ms: Connection refused
+
+CPU3 与独立服务就绪；持续监视当前开入，波形段需明确新建采集
+
+0-2
+
+rt_mpu_a7_rproc
+
+running
+
+e907_rproc
+
+offline
+
+{"format":"logic16-le-v1","channels":16,"byteOrder":"little","sampleCount":0,"samplePeriodTicks":null,"clockHz":24000000,"sequenceStart":null,"droppedSamples":null,"source":"CPU3 16 位总线遥信 · CS 常开","mode":"device","deviceConnected":true,"demo":false,"captureId":0,"sourceEpoch":"redacted-for-publication","captureState":"idle","capacity":null,"errorCode":0,"pendingCommand":false,"pattern":false,"softwareServiceTest":false,"nominalTime":true,"sampleTimeBasis":"software-read-entry","droppedAtTail":true,"firstSampleTick":null,"lastSampleTick":null,"minIntervalTicks":null,"maxIntervalTicks":null,"maxLateTicks":null,"maxReadTicks":null,"lastWord":null,"primingReads":null,"primingMaxTicks":null,"shutdownResult":null,"startupGpioProbeWord":65535,"liveMonitorSupported":true,"liveWord":65535,"liveReadSequence":192,"livePeriodTicks":24000,"liveErrorCode":0,"liveMonitorEnabled":true}
+
+__L16_RESULT:0
+
+root@TQ153:/app/open_logic/releases/20261016-v15# 

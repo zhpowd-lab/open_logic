@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="zh-CN">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>DTU 实时采样监测</title><link rel="stylesheet" href="/uplot.css"><link rel="stylesheet" href="/workspace/style.css"></head>
+<body>
+<main class="monitor">
+  <header class="masthead"><div><h1>DTU 实时采样监测</h1><p id="sourceLine">T153 · 正在连接实际数据</p></div><div class="online"><span id="connection" role="status">连接中</span><span id="sampleRate">— kSPS</span><a href="/" class="quiet-link">原版页面 ↗</a></div></header>
+  <nav class="page-tabs" aria-label="监测页面">
+    <button data-page="wave" aria-current="page">实时波形</button><button data-page="measure">测量统计</button><button data-page="fft">谐波 / FFT</button><button data-page="record">录波与事件</button><button data-page="diagnostics">采集诊断</button>
+  </nav>
+  <div class="status-strip"><span id="displayState">等待样点</span><span id="qualityState">质量待核对</span><span id="sampleAge">—</span></div>
+  <div class="workspace">
+    <aside class="channel-panel">
+      <h2>通道</h2><label for="switchSelect">选择开关</label><select id="switchSelect"><option value="">保留原页面选择</option></select>
+      <label for="voltageSelect">公共电压</label><select id="voltageSelect"><option value="1">公共电压 · 第1组</option><option value="2">公共电压 · 第2组</option></select>
+      <p class="hint">选择一个开关，自动显示 Ia、Ib、Ic、I0；公共电压只显示一组。</p>
+      <div id="channelLegend" class="channel-legend"></div>
+      <details><summary>80路采样目录</summary><input id="channelSearch" type="search" placeholder="搜索名称 / ADC引脚" aria-label="搜索80路通道"><div id="channelDirectory" class="directory"></div></details>
+      <a class="settings-link" href="/" target="_blank" rel="noopener">通道系数与全部原功能 ↗</a>
+    </aside>
+    <section class="content-panel">
+      <section id="page-wave" class="page-panel">
+        <div class="chart-toolbar"><div class="segmented" aria-label="波形布局"><button id="layoutSplit" aria-pressed="true">分通道波形</button><button id="layoutOverlay" aria-pressed="false">叠加波形</button></div><div class="segmented" aria-label="显示单位"><button id="unitPhysical" aria-pressed="true">A / V</button><button id="unitRaw" aria-pressed="false">ADC码</button></div></div>
+        <div id="plots" class="plots" aria-label="实际采样波形"></div>
+        <div class="time-toolbar"><label for="windowSelect">时间范围</label><select id="windowSelect"><option value="20">20 ms / 1周波</option><option value="100">100 ms / 5周波</option><option value="200">200 ms</option><option value="500">500 ms</option><option value="1000">1 s</option><option value="2000">2 s</option><option value="4000">4 s</option><option value="10000">10 s</option></select><button id="zoomIn" title="同步缩小时间范围">放大</button><button id="zoomOut" title="同步扩大时间范围">缩小</button><button id="resetView">复位视图</button></div>
+        <div class="time-toolbar"><button id="cursorA" aria-pressed="false">光标 A</button><button id="cursorB" aria-pressed="false">光标 B</button><button id="rawDetail">原始细节</button><button id="liveView" hidden>返回流视图</button><button id="pauseDisplay" disabled>冻结显示</button><button id="resumeDisplay" disabled>继续显示</button><button id="exportCapture" disabled>导出录波</button></div>
+        <p id="dataExtent" class="hint"></p><p id="cursorReadout" class="cursor-readout">框选或滚轮同步缩放 · Shift拖动平移 · 双击复位</p><p id="detailState" class="hint" role="status"></p>
+      </section>
+      <section id="page-measure" class="page-panel" hidden><h2>测量统计</h2><p id="measurementScope" class="hint"></p><p class="hint">保留原测量口径：总交流RMS去直流，基波与THD沿用原后端FFT估计。缩放和隐藏曲线不会改变计算窗口；通道标称系数不代表现场校准通过。</p><div class="table-scroll"><table><thead><tr><th>通道</th><th>交流 RMS</th><th>总 RMS</th><th>50 Hz 基波</th><th>THD</th><th>频率</th><th>直流分量</th><th>峰峰值</th><th>样点数 / FFT状态</th></tr></thead><tbody id="measurementRows"></tbody></table></div></section>
+      <section id="page-fft" class="page-panel" hidden><h2>谐波 / FFT</h2><p class="hint">使用接口提供的连续原始尾窗，沿用现有FFT函数；不对抽点波形计算频谱。幅值为峰值谱，非RMS。最多2048点 Hann窗，THD至少10周波。</p><div id="fftPlots" class="plots"></div><p id="fftState" class="hint"></p></section>
+      <section id="page-record" class="page-panel" hidden><h2>录波与事件</h2><p class="hint">事件时间保留实际样点时间与电脑观察时间；本页的采集监测事件不等于保护SOE。录波下载沿用现有COMTRADE文件。</p>
+        <details id="triggerDetails"><summary>触发设置</summary><form id="triggerForm" class="trigger-grid">
+          <label>信号<select id="triggerChannel"></select></label><label>条件<select id="triggerCondition"><option value="cycle_diff">与前周波同相位差值</option><option value="abs_gt">绝对值大于</option><option value="gt">大于</option><option value="lt">小于</option><option value="rising">上升穿越</option><option value="falling">下降穿越</option></select></label>
+          <label>阈值 / ADC码<input id="triggerThreshold" type="number" min="-32768" max="32767" required></label><label>连续样点<input id="triggerConsecutive" type="number" min="1" max="128" required></label><label>参考周波<select id="triggerReference"><option value="1">前1周波</option><option value="2">前2周波</option></select></label><label>触发前 / ms<input id="triggerPre" type="number" min="0" max="1000" required></label><label>后录模式<select id="triggerPostMode"><option value="cycles">周波</option><option value="ms">毫秒</option></select></label><label>触发后 / 周波<input id="triggerPostCycles" type="number" min="0" max="50" required></label><label>触发后 / ms<input id="triggerPostMs" type="number" min="0" max="1000" required></label><button id="armTrigger" type="submit" disabled>应用并布防</button>
+        </form><p class="hint">只修改电脑端触发；“继续显示”会按原接口取消布防，装置采样始终继续。阈值保持原始ADC码口径。</p></details>
+        <div class="section-heading"><h3>事件时间线</h3><label>筛选<select id="eventFilter"><option value="all">全部</option><option value="saved">录波文件</option><option value="trigger">触发</option><option value="fault">采集与连接异常</option></select></label></div><div id="eventList" class="event-list"></div><h3>末次数字量</h3><div id="digital" class="digital-grid"></div>
+      </section>
+      <section id="page-diagnostics" class="page-panel" hidden><h2>采集诊断</h2><p class="hint">计数来自当前接口，历史累计不清零；未知字段显示“未知”。软件读回与连续帧核验不能替代实际动作或物理时序验收。</p><dl id="diagnosticValues" class="diagnostic-values"></dl><h3>浏览器绘图</h3><dl id="performanceValues" class="diagnostic-values"></dl><p class="hint">绘图时间含本页布局和画布更新；CPU与进程内存由验收工具单独测量，页面JS堆大小不代表整个浏览器。</p><a href="http://127.0.0.1:8099/" target="_blank" rel="noopener">打开完整A7 / E907与Linux线程诊断 ↗</a></section>
+    </section>
+    <aside class="measurement-panel"><h2>测量值</h2><label for="metricChannel">关注通道</label><select id="metricChannel"></select><div id="metricCards"></div><p id="metricScope" class="hint"></p><p class="hint">数值来自原后端完整窗口，非可见折线。保留原有系数。</p></aside>
+  </div>
+  <footer class="event-footer"><div class="section-heading"><h2>事件 / 采集状态</h2><button id="showEvents">查看全部事件 →</button></div><p id="latestEvent">等待实际数据</p><p id="footerStats" class="hint"></p></footer>
+</main><div id="notice" class="notice" role="status" hidden></div>
+<script src="/uplot.js"></script><script src="/fft.js"></script><script src="/spectrum.js"></script><script src="/workspace/model.js"></script><script src="/workspace/app.js"></script>
+</body></html>

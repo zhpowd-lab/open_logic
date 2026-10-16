@@ -1,0 +1,55 @@
+name: Import verified project and publish preview
+on:
+  push:
+    branches: [main]
+    paths: ['bootstrap/**']
+permissions:
+  contents: write
+concurrency:
+  group: open-logic-initial-publication
+  cancel-in-progress: false
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    env:
+      GH_TOKEN: ${{ github.token }}
+      TAG: v0.1.0-device-v15-preview
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Restore exact project bytes and verify manifest
+        run: python3 bootstrap/import.py
+      - name: Test browser data and HTTP interfaces offline
+        run: node --test app/logic-analyzer/test/capture.test.mjs app/logic-analyzer/test/server.test.mjs app/logic-analyzer/test/device.test.mjs
+      - name: Test device service and C models offline
+        shell: bash
+        run: |
+          set -euo pipefail
+          cd app/device
+          PYTHONDONTWRITEBYTECODE=1 python3 test/service-test.py
+          gcc -std=gnu11 -O2 -Wall -Wextra -Werror -DL16_HOST_TEST -fsanitize=address,undefined -fno-omit-frame-pointer test/board-test.c firmware/board.c -o "$RUNNER_TEMP/board-test"
+          "$RUNNER_TEMP/board-test"
+          gcc -std=gnu11 -O2 -Wall -Wextra -Werror -DL16_HOST_TEST -fsanitize=address,undefined -fno-omit-frame-pointer test/capture-test.c -o "$RUNNER_TEMP/capture-test"
+          "$RUNNER_TEMP/capture-test"
+      - name: Commit original source and firmware files
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config core.autocrlf false
+          git config user.name 'github-actions[bot]'
+          git config user.email 'github-actions[bot]@users.noreply.github.com'
+          git add --all
+          git commit -m 'Import logic analyzer source, v15 firmware and validation evidence'
+          git push origin HEAD:main
+      - name: Publish matching firmware and source downloads
+        shell: bash
+        run: |
+          set -euo pipefail
+          asset_dir="$RUNNER_TEMP/open-logic-release"
+          mkdir "$asset_dir"
+          cp app/device/release/open_logic-device-v15-20261016.tar app/device/release/open_logic-device-v15-source.tar.gz app/device/release/logic16.elf app/device/release/logic16_access.ko "$asset_dir/"
+          git archive --format=zip --output="$asset_dir/open_logic-source-20261016.zip" HEAD
+          (cd "$asset_dir" && sha256sum open_logic-device-v15-20261016.tar open_logic-device-v15-source.tar.gz logic16.elf logic16_access.ko open_logic-source-20261016.zip > SHA256SUMS)
+          gh release create "$TAG" "$asset_dir/"* --repo "$GITHUB_REPOSITORY" --target "$(git rev-parse HEAD)" --prerelease --title '遥信逻辑分析仪 v15 实验预览版' --notes-file agent/publish/RELEASE_NOTES.md
